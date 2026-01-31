@@ -1,0 +1,86 @@
+.nf {
+  min-height: calc(100vh - 80px);
+  display: grid;
+  place-items: center;
+  padding: 40px 16px;
+  background: #f7f7f7;
+}
+
+.nf-box {
+  background: #fff;
+  border: 1px solid rgba(11, 18, 32, 0.08);
+  border-radius: 22px;
+  padding: 40px 32px;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+}
+
+.nf-code {
+  font-size: 64px;
+  font-weight: 900;
+  color: #3b82f6;
+  letter-spacing: -0.04em;
+}
+
+.nf-title {
+  margin-top: 10px;
+  font-size: 22px;
+  font-weight: 900;
+  color: #0b1220;
+}
+
+.nf-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(11, 18, 32, 0.68);
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.nf-actions {
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: 0.2s ease;
+}
+
+.nf-btn ion-icon {
+  font-size: 18px;
+}
+
+.nf-btn.primary {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.nf-btn.primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.96);
+}
+
+.nf-btn.ghost {
+  background: #fff;
+  color: #0b1220;
+  border-color: rgba(11, 18, 32, 0.14);
+}
+
+.nf-btn.ghost:hover {
+  transform: translateY(-1px);
+  border-color: rgba(11, 18, 32, 0.22);
+}

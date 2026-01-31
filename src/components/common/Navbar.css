@@ -1,0 +1,334 @@
+/* ===== ROOT ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.nav-shell {
+  max-width: 1440px; /* ✅ so‘ralgan */
+  margin: 0 auto;
+  padding: 10px 40px 8px;
+}
+
+@media (max-width: 560px) {
+  .nav-shell {
+    padding: 10px 16px 8px;
+  }
+}
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-row-top {
+  padding: 6px 0 8px;
+}
+
+.nav-row-sub {
+  padding: 8px 0 10px;
+  border-top: 1px solid rgba(48, 55, 79, 0.08);
+}
+
+/* ===== BRAND ===== */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  background: rgba(248, 173, 64, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nav-accent);
+  border: 1px solid rgba(248, 173, 64, 0.22);
+}
+
+.brand-mark ion-icon {
+  font-size: 18px;
+}
+
+.brand-text {
+  color: var(--nav-ink);
+  letter-spacing: -0.02em;
+}
+
+.brand-accent {
+  color: var(--nav-accent);
+}
+
+/* ===== SEARCH (2-rasmdagi kabi: katta va markazga yaqin) ===== */
+.nav-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 46px;
+  border-radius: 14px;
+  padding: 0 12px;
+  background: var(--nav-soft);
+  border: 1px solid rgba(48, 55, 79, 0.12);
+  min-width: 260px;
+}
+
+.nav-search-icon {
+  color: rgba(48, 55, 79, 0.55);
+}
+
+.nav-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  font-size: 14px;
+  background: transparent;
+  color: var(--nav-ink);
+}
+
+.nav-search-input::placeholder {
+  color: rgba(48, 55, 79, 0.55);
+}
+
+.nav-search-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--nav-accent);
+  display: grid;
+  place-items: center;
+}
+
+.nav-search-btn ion-icon {
+  font-size: 18px;
+}
+
+/* ===== RIGHT ACTIONS ===== */
+.nav-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 14px;
+  font-weight: 800;
+  border: 1px solid transparent;
+  background: var(--nav-surface);
+  cursor: pointer;
+  color: var(--nav-ink);
+  transition: 0.18s ease;
+}
+
+.nav-btn ion-icon {
+  font-size: 18px;
+}
+
+.nav-btn.primary {
+  background: var(--nav-accent);
+  color: #111;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.nav-btn.primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.99);
+}
+
+.nav-btn.ghost {
+  border-color: rgba(48, 55, 79, 0.14);
+}
+
+.nav-btn.ghost:hover {
+  transform: translateY(-1px);
+  border-color: rgba(48, 55, 79, 0.22);
+}
+
+/* Cart */
+.nav-cart {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--nav-surface);
+  border: 1px solid rgba(48, 55, 79, 0.14);
+  position: relative;
+  transition: 0.18s ease;
+}
+
+.nav-cart:hover {
+  transform: translateY(-1px);
+  border-color: rgba(48, 55, 79, 0.22);
+}
+
+.nav-cart ion-icon {
+  font-size: 20px;
+  color: var(--nav-ink);
+}
+
+.nav-cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--nav-accent);
+  color: #111;
+  font-size: 11px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--nav-surface);
+}
+
+/* ===== SUB LINKS (2-qator) ===== */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-weight: 800;
+  color: rgba(48, 55, 79, 0.78);
+  transition: 0.18s ease;
+}
+
+.nav-link ion-icon {
+  font-size: 18px;
+  color: rgba(48, 55, 79, 0.62);
+}
+
+.nav-link:hover {
+  background: rgba(48, 55, 79, 0.06);
+  color: var(--nav-ink);
+}
+
+.nav-link.active {
+  background: rgba(248, 173, 64, 0.18);
+  color: var(--nav-ink);
+}
+
+.nav-link.active ion-icon {
+  color: var(--nav-accent);
+}
+
+/* ===== BURGER ===== */
+.nav-burger {
+  display: none;
+  border: 1px solid rgba(48, 55, 79, 0.14);
+  background: var(--nav-surface);
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+/* ================================================= */
+/* ================= MOBILE MENU =================== */
+/* ================================================= */
+
+.nav-mobile {
+  display: none;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 980px) {
+  .nav-shell {
+    padding: 10px 16px 8px;
+  }
+
+  /* top row compact: hide desktop buttons/links, keep brand + cart + burger */
+  .nav-search {
+    display: none;
+  }
+
+  .nav-btn {
+    display: none;
+  }
+
+  .nav-row-sub {
+    display: none;
+  }
+
+  .nav-burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Mobile container */
+  .nav-mobile {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s ease;
+    z-index: 200;
+  }
+
+  .nav-mobile.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-mobile-inner {
+    background: #fff;
+    padding: 16px;
+    border-radius: 18px;
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid rgba(48, 55, 79, 0.10);
+  }
+
+  .nav-search.mobile {
+    display: flex;
+  }
+
+  .nav-mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 14px;
+    font-weight: 800;
+    border: 1px solid rgba(48, 55, 79, 0.12);
+    color: var(--nav-ink);
+    background: #fff;
+  }
+
+  .nav-mobile-link.primary {
+    background: var(--nav-accent);
+    color: #111;
+    border-color: transparent;
+  }
+}
