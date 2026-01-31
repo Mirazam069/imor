@@ -287,44 +287,6 @@ function Catalog() {
               ))}
             </div>
           </div>
-
-          <div className="panel filter">
-            <button
-              className="panel-head clickable"
-              onClick={() => setManufacturersOpen((p) => !p)}
-              type="button"
-            >
-              <div className="panel-title">
-                <ion-icon name="ribbon-outline"></ion-icon>
-                <span>Ishlab chiqaruvchilar</span>
-              </div>
-
-              <ion-icon
-                className="panel-chevron"
-                name={manufacturersOpen ? "chevron-up-outline" : "chevron-down-outline"}
-              />
-            </button>
-
-            {manufacturersOpen && (
-              <div className="panel-body">
-                {MANUFACTURERS.map((m) => (
-                  <label key={m} className="check">
-                    <input
-                      type="checkbox"
-                      checked={selectedM.includes(m)}
-                      onChange={() => toggleManufacturer(m)}
-                    />
-                    <span>{m}</span>
-                  </label>
-                ))}
-
-                <button className="filter-all" type="button">
-                  Barchasini ko‘rsatish
-                  <ion-icon name="arrow-forward-outline"></ion-icon>
-                </button>
-              </div>
-            )}
-          </div>
         </aside>
 
         {/* RIGHT */}
@@ -592,9 +554,6 @@ function TreeNode({ node, openKeys, activeKey, onToggle, onSelect, level }) {
   );
 }
 
-
-console.log("API_URL:", API_URL);
-console.log("API_ORIGIN:", API_ORIGIN);
 
 
 
