@@ -3,8 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getSellerById, getSellerProducts } from "../../../api/sellers.api";
 import { deleteProduct } from "../../../api/products.api";
-
-const API_URL = import.meta.env.VITE_API_URL || "";
+import { resolveBackendUrl } from "../../../config/env";
 
 function pickImageUrl(p) {
   let u =
@@ -18,19 +17,11 @@ function pickImageUrl(p) {
 
   if (!u) return "";
 
-  // ✅ 0) base64 data URL bo‘lsa — o‘z holicha qaytadi
+  // ✅ base64 data URL bo‘lsa — o‘z holicha
   if (String(u).startsWith("data:")) return u;
 
-  // ✅ 1) agar to‘liq URL bo‘lsa
-  if (/^https?:\/\//i.test(u)) return u;
-
-  // ✅ 2) API_URL bo‘sh bo‘lsa — prefix qilmang (aks holda /data:image... bo‘lib ketadi)
-  if (!API_URL) return u;
-
-  // ✅ 3) relative path bo‘lsa API_URL bilan birlashtiramiz
-  if (u.startsWith("/")) return `${API_URL}${u}`;
-
-  return `${API_URL}/${u}`;
+  // ✅ absolute yoki relative bo‘lsa ham backendga to‘g‘rilab beradi
+  return resolveBackendUrl(u);
 }
 
 function formatUZS(n) {
@@ -38,8 +29,6 @@ function formatUZS(n) {
   return s.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-// Hozircha demo: qaysi seller ekanini default qilib turamiz.
-// Keyin real auth bo‘lsa: user.sellerId dan olamiz.
 const DEFAULT_SELLER_ID = "s_1";
 
 export default function SellerProducts() {

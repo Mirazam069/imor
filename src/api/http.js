@@ -1,4 +1,3 @@
-// src/api/http.js
 import axios from "axios";
 import { API_URL } from "../config/env";
 import { getToken, clearToken } from "../utils/storage";

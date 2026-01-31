@@ -17,7 +17,7 @@ export default function ImageUploader({
 
   const preview = useMemo(() => {
     if (!value) return "";
-    return resolveBackendUrl(value); // ✅ "/uploads/x" -> "https://.../uploads/x"
+    return resolveBackendUrl(value); // "/uploads/x" -> "https://.../uploads/x"
   }, [value]);
 
   async function onPick(e) {
@@ -28,9 +28,14 @@ export default function ImageUploader({
     try {
       setBusy(true);
       const res = await uploadImage(file);
-      onChange?.(res.url); // saqlanadigan qiymat: "/uploads/xxx.jpg"
+
+      // ✅ backend absolute url qaytarsa ham, relative qaytarsa ham ishlaydi
+      onChange?.(res.url);
+
+      // ✅ bir xil faylni qayta tanlasa ham onChange ishlashi uchun
+      if (inputRef.current) inputRef.current.value = "";
     } catch (er) {
-      setErr(er?.message || "Upload xatosi.");
+      setErr(er?.response?.data?.error || er?.message || "Upload xatosi.");
     } finally {
       setBusy(false);
     }
@@ -44,7 +49,7 @@ export default function ImageUploader({
       onChange?.("");
       if (inputRef.current) inputRef.current.value = "";
     } catch (er) {
-      setErr(er?.message || "O‘chirish xatosi.");
+      setErr(er?.response?.data?.error || er?.message || "O‘chirish xatosi.");
     } finally {
       setBusy(false);
     }
