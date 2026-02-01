@@ -11,20 +11,51 @@ function Navbar() {
 
   const { cartCount } = useCart();
 
+  // Language
+  const [langOpen, setLangOpen] = useState(false);
+  const [lang, setLang] = useState("UZ");
+
   const isCatalog = useMemo(
     () => location.pathname.startsWith("/catalog"),
     [location.pathname]
   );
 
-  // ✅ NEW: Seller panel active holati
   const isSeller = useMemo(
     () => location.pathname.startsWith("/seller"),
     [location.pathname]
   );
 
+  const isAbout = useMemo(
+    () => location.pathname.startsWith("/about"),
+    [location.pathname]
+  );
+
   useEffect(() => {
     setMenuOpen(false);
+    setLangOpen(false);
   }, [location.pathname]);
+
+  // outside click: lang close
+  useEffect(() => {
+    const onDoc = (e) => {
+      const t = e.target;
+      if (!t?.closest?.(".nav-lang")) setLangOpen(false);
+    };
+    document.addEventListener("click", onDoc);
+    return () => document.removeEventListener("click", onDoc);
+  }, []);
+
+  // ESC closes mobile menu + lang
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        setLangOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -33,12 +64,21 @@ function Navbar() {
       return;
     }
     navigate(`/catalog?q=${encodeURIComponent(q.trim())}`);
+    setMenuOpen(false);
   };
+
+  const onPickLang = (next) => {
+    setLang(next);
+    setLangOpen(false);
+    // keyin i18n ulash mumkin (localStorage/context)
+  };
+
+  const closeMobile = () => setMenuOpen(false);
 
   return (
     <header className="nav">
       <div className="nav-shell">
-        {/* ===== ROW 1 (2-rasmdagidek: logo + big search + right actions) ===== */}
+        {/* ===== ROW 1 ===== */}
         <div className="nav-row nav-row-top">
           {/* Logo */}
           <Link to="/" className="brand">
@@ -50,7 +90,7 @@ function Navbar() {
             </span>
           </Link>
 
-          {/* Search */}
+          {/* Search (desktop) */}
           <form className="nav-search" onSubmit={onSubmit}>
             <span className="nav-search-icon">
               <ion-icon name="search-outline"></ion-icon>
@@ -66,12 +106,47 @@ function Navbar() {
             </button>
           </form>
 
-          {/* Right actions (2-rasmdagidek o‘ng tomonda) */}
+          {/* Right actions */}
           <div className="nav-right">
-            <Link to="/post-ad" className="nav-btn primary">
-              <ion-icon name="add-circle-outline"></ion-icon> E'lon joylash
-            </Link>
+            {/* ✅ Language (mobile ham ko‘rinadi) */}
+            <div className={langOpen ? "nav-lang open" : "nav-lang"}>
+              <button
+                type="button"
+                className="nav-lang-btn"
+                onClick={() => setLangOpen((p) => !p)}
+                aria-label="Til tanlash"
+              >
+                <ion-icon name="language-outline"></ion-icon>
+                <span className="nav-lang-code">{lang}</span>
+                <ion-icon className="nav-lang-chev" name="chevron-down-outline"></ion-icon>
+              </button>
 
+              <div className="nav-lang-menu" role="menu" aria-label="Languages">
+                <button
+                  type="button"
+                  className="nav-lang-item"
+                  onClick={() => onPickLang("UZ")}
+                >
+                  O‘zbekcha <small>UZ</small>
+                </button>
+                <button
+                  type="button"
+                  className="nav-lang-item"
+                  onClick={() => onPickLang("RU")}
+                >
+                  Русский <small>RU</small>
+                </button>
+                <button
+                  type="button"
+                  className="nav-lang-item"
+                  onClick={() => onPickLang("EN")}
+                >
+                  English <small>EN</small>
+                </button>
+              </div>
+            </div>
+
+            {/* Desktop login (mobileda css yashiradi) */}
             <NavLink to="/login" className="nav-btn ghost">
               <ion-icon name="log-in-outline"></ion-icon>
               Kirish
@@ -97,7 +172,7 @@ function Navbar() {
           </div>
         </div>
 
-        {/* ===== ROW 2 (2-rasmdagidek: sub nav links) ===== */}
+        {/* ===== ROW 2 (desktop sub-links) ===== */}
         <div className="nav-row nav-row-sub">
           <nav className="nav-links">
             <NavLink
@@ -108,6 +183,16 @@ function Navbar() {
             >
               <ion-icon name="grid-outline"></ion-icon>
               Katalog
+            </NavLink>
+
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive || isAbout ? "nav-link active" : "nav-link"
+              }
+            >
+              <ion-icon name="information-circle-outline"></ion-icon>
+              IMOR haqida
             </NavLink>
 
             <NavLink
@@ -123,9 +208,32 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile */}
-      <div className={menuOpen ? "nav-mobile open" : "nav-mobile"}>
-        <div className="nav-mobile-inner">
+      {/* ✅ Mobile overlay: qolgan joyni bossang ham yopiladi */}
+      <div
+        className={menuOpen ? "nav-mobile open" : "nav-mobile"}
+        onClick={closeMobile}
+        role="presentation"
+      >
+        <div
+          className="nav-mobile-inner"
+          onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-label="Mobile menu"
+        >
+          {/* ✅ Close row (≤430px da X chiqadi) */}
+          <div className="nav-mobile-head">
+            <div className="nav-mobile-title">Menyu</div>
+            <button
+              type="button"
+              className="nav-mobile-close"
+              onClick={closeMobile}
+              aria-label="Yopish"
+            >
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+
+          {/* ✅ Mobile search (ezilmaydi, button kabi) */}
           <form className="nav-search mobile" onSubmit={onSubmit}>
             <span className="nav-search-icon">
               <ion-icon name="search-outline"></ion-icon>
@@ -141,27 +249,29 @@ function Navbar() {
             </button>
           </form>
 
-          <NavLink to="/catalog" className="nav-mobile-link">
+          <NavLink to="/catalog" className="nav-mobile-link" onClick={closeMobile}>
             <ion-icon name="grid-outline"></ion-icon>
             Katalog
           </NavLink>
 
-          <NavLink to="/seller/products" className="nav-mobile-link">
+          <NavLink to="/about" className="nav-mobile-link" onClick={closeMobile}>
+            <ion-icon name="information-circle-outline"></ion-icon>
+            IMOR haqida
+          </NavLink>
+
+          <NavLink to="/seller/products" className="nav-mobile-link" onClick={closeMobile}>
             <ion-icon name="briefcase-outline"></ion-icon>
             Sotuvchi paneli
           </NavLink>
 
-          <NavLink to="/post-ad" className="nav-mobile-link primary">
-            <ion-icon name="add-circle-outline"></ion-icon>
-            E’lon joylash
-          </NavLink>
+          {/* ❌ E’lon joylash olib tashlandi (mobileda ham yo‘q) */}
 
-          <NavLink to="/login" className="nav-mobile-link">
+          <NavLink to="/login" className="nav-mobile-link" onClick={closeMobile}>
             <ion-icon name="log-in-outline"></ion-icon>
             Kirish
           </NavLink>
 
-          <NavLink to="/cart" className="nav-mobile-link">
+          <NavLink to="/cart" className="nav-mobile-link" onClick={closeMobile}>
             <ion-icon name="cart-outline"></ion-icon>
             Korzina
             {cartCount > 0 && (
@@ -170,6 +280,18 @@ function Navbar() {
               </span>
             )}
           </NavLink>
+
+          {/* Mobile language quick switch (optional) */}
+          <button
+            type="button"
+            className="nav-mobile-link nav-mobile-lang"
+            onClick={() =>
+              onPickLang(lang === "UZ" ? "RU" : lang === "RU" ? "EN" : "UZ")
+            }
+          >
+            <ion-icon name="language-outline"></ion-icon>
+            Til: {lang} (bosib almashtir)
+          </button>
         </div>
       </div>
     </header>

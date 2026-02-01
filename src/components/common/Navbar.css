@@ -9,15 +9,13 @@
 }
 
 .nav-shell {
-  max-width: 1440px; /* ✅ so‘ralgan */
+  max-width: 1440px;
   margin: 0 auto;
   padding: 10px 40px 8px;
 }
 
 @media (max-width: 560px) {
-  .nav-shell {
-    padding: 10px 16px 8px;
-  }
+  .nav-shell { padding: 10px 16px 8px; }
 }
 
 .nav-row {
@@ -26,9 +24,7 @@
   gap: 14px;
 }
 
-.nav-row-top {
-  padding: 6px 0 8px;
-}
+.nav-row-top { padding: 6px 0 8px; }
 
 .nav-row-sub {
   padding: 8px 0 10px;
@@ -57,20 +53,16 @@
   border: 1px solid rgba(248, 173, 64, 0.22);
 }
 
-.brand-mark ion-icon {
-  font-size: 18px;
-}
+.brand-mark ion-icon { font-size: 18px; }
 
 .brand-text {
   color: var(--nav-ink);
   letter-spacing: -0.02em;
 }
 
-.brand-accent {
-  color: var(--nav-accent);
-}
+.brand-accent { color: var(--nav-accent); }
 
-/* ===== SEARCH (2-rasmdagi kabi: katta va markazga yaqin) ===== */
+/* ===== SEARCH ===== */
 .nav-search {
   flex: 1;
   display: flex;
@@ -83,9 +75,7 @@
   min-width: 260px;
 }
 
-.nav-search-icon {
-  color: rgba(48, 55, 79, 0.55);
-}
+.nav-search-icon { color: rgba(48, 55, 79, 0.55); }
 
 .nav-search-input {
   flex: 1;
@@ -95,6 +85,8 @@
   font-size: 14px;
   background: transparent;
   color: var(--nav-ink);
+  height: 44px;          /* ✅ ezilib qolmasin */
+  line-height: 44px;     /* ✅ */
 }
 
 .nav-search-input::placeholder {
@@ -110,15 +102,14 @@
   place-items: center;
 }
 
-.nav-search-btn ion-icon {
-  font-size: 18px;
-}
+.nav-search-btn ion-icon { font-size: 18px; }
 
 /* ===== RIGHT ACTIONS ===== */
 .nav-right {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  margin-left: auto; /* ✅ cart + menu + lang o‘ngga ketadi */
 }
 
 /* Buttons */
@@ -137,9 +128,7 @@
   transition: 0.18s ease;
 }
 
-.nav-btn ion-icon {
-  font-size: 18px;
-}
+.nav-btn ion-icon { font-size: 18px; }
 
 .nav-btn.primary {
   background: var(--nav-accent);
@@ -152,13 +141,86 @@
   filter: brightness(0.99);
 }
 
-.nav-btn.ghost {
-  border-color: rgba(48, 55, 79, 0.14);
-}
+.nav-btn.ghost { border-color: rgba(48, 55, 79, 0.14); }
 
 .nav-btn.ghost:hover {
   transform: translateY(-1px);
   border-color: rgba(48, 55, 79, 0.22);
+}
+
+/* ===== LANGUAGE SWITCH ===== */
+.nav-lang { position: relative; }
+
+.nav-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px; /* ✅ mobile header bilan bir xil */
+  padding: 0 12px;
+  border-radius: 14px;
+  font-weight: 900;
+  background: var(--nav-surface);
+  border: 1px solid rgba(48, 55, 79, 0.14);
+  cursor: pointer;
+  color: var(--nav-ink);
+  transition: 0.18s ease;
+}
+
+.nav-lang-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(48, 55, 79, 0.22);
+}
+
+.nav-lang-btn ion-icon {
+  font-size: 18px;
+  color: rgba(48, 55, 79, 0.65);
+}
+
+.nav-lang-code { font-weight: 900; }
+.nav-lang-chev { opacity: 0.8; }
+
+.nav-lang-menu {
+  position: absolute;
+  top: 54px;
+  right: 0;
+  width: 160px;
+  background: #fff;
+  border: 1px solid rgba(48, 55, 79, 0.12);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: 0.18s ease;
+  z-index: 999;
+}
+
+.nav-lang.open .nav-lang-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.nav-lang-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--nav-ink);
+}
+
+.nav-lang-item:hover { background: rgba(48, 55, 79, 0.06); }
+
+.nav-lang-item small {
+  opacity: 0.6;
+  font-weight: 800;
 }
 
 /* Cart */
@@ -201,7 +263,7 @@
   border: 2px solid var(--nav-surface);
 }
 
-/* ===== SUB LINKS (2-qator) ===== */
+/* ===== SUB LINKS (desktop) ===== */
 .nav-links {
   display: flex;
   align-items: center;
@@ -234,9 +296,7 @@
   color: var(--nav-ink);
 }
 
-.nav-link.active ion-icon {
-  color: var(--nav-accent);
-}
+.nav-link.active ion-icon { color: var(--nav-accent); }
 
 /* ===== BURGER ===== */
 .nav-burger {
@@ -249,32 +309,24 @@
   cursor: pointer;
 }
 
-/* ================================================= */
-/* ================= MOBILE MENU =================== */
-/* ================================================= */
-
-.nav-mobile {
-  display: none;
-}
+/* ================= MOBILE MENU ================= */
+.nav-mobile { display: none; }
 
 /* Mobile breakpoint */
 @media (max-width: 980px) {
-  .nav-shell {
-    padding: 10px 16px 8px;
-  }
+  .nav-shell { padding: 10px 16px 8px; }
 
-  /* top row compact: hide desktop buttons/links, keep brand + cart + burger */
-  .nav-search {
-    display: none;
-  }
+  /* desktop search hide */
+  .nav-search { display: none; }
 
-  .nav-btn {
-    display: none;
-  }
+  /* desktop login button hide */
+  .nav-btn { display: none; }
 
-  .nav-row-sub {
-    display: none;
-  }
+  /* ✅ lang ko‘rinsin (yashirmaymiz) */
+  /* .nav-lang { display: none; }  <-- olib tashlandi */
+
+  /* desktop sub nav hide */
+  .nav-row-sub { display: none; }
 
   .nav-burger {
     display: inline-flex;
@@ -282,7 +334,7 @@
     justify-content: center;
   }
 
-  /* Mobile container */
+  /* Mobile overlay */
   .nav-mobile {
     display: block;
     position: fixed;
@@ -308,10 +360,46 @@
     flex-direction: column;
     gap: 12px;
     border: 1px solid rgba(48, 55, 79, 0.10);
+    max-width: 430px; /* ✅ so‘ralgan */
   }
 
+  /* ✅ Mobile head (Menyu + X) */
+  .nav-mobile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 2px 2px 6px;
+  }
+
+  .nav-mobile-title {
+    font-weight: 900;
+    color: var(--nav-ink);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-mobile-close {
+    display: none; /* default: faqat 430px da ko‘rinadi */
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    border: 1px solid rgba(48, 55, 79, 0.14);
+    background: #fff;
+    cursor: pointer;
+    color: var(--nav-ink);
+  }
+
+  .nav-mobile-close ion-icon { font-size: 22px; }
+
+  /* ✅ Mobile search: buttonlar kabi balandlik */
   .nav-search.mobile {
     display: flex;
+    width: 100%;
+    height: 46px;
+    border-radius: 14px;
+    padding: 0 12px;
+    background: var(--nav-soft);
+    border: 1px solid rgba(48, 55, 79, 0.12);
   }
 
   .nav-mobile-link {
@@ -324,11 +412,19 @@
     border: 1px solid rgba(48, 55, 79, 0.12);
     color: var(--nav-ink);
     background: #fff;
+    cursor: pointer;
   }
 
-  .nav-mobile-link.primary {
-    background: var(--nav-accent);
-    color: #111;
-    border-color: transparent;
+  .nav-mobile-link:hover {
+    border-color: rgba(48, 55, 79, 0.20);
   }
+
+  .nav-mobile-lang {
+    background: rgba(48, 55, 79, 0.04);
+  }
+}
+
+/* ✅ X faqat 430px va undan kichikda chiqsin */
+@media (max-width: 430px) {
+  .nav-mobile-close { display: inline-flex; align-items: center; justify-content: center; }
 }
