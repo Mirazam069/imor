@@ -120,7 +120,7 @@ export default function Cart() {
       <div className="cart-container">
         <div className="cart-head">
           <div>
-            <div className="cart-badge">QRS</div>
+            <div className="cart-badge">IMOR</div>
             <h1 className="cart-title">Korzina</h1>
             <div className="cart-sub">
               Tanlanganlar: <b>{cartCount} dona</b>

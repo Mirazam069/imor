@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { CATALOG_TREE } from "../../Catalog/catalogData";
 import { createProduct } from "../../../api/products.api";
 import ImageUploader from "../../../components/common/ImageUploader";
-import { API_URL } from "../../../config/env"; // ✅ qo‘shildi
+import { API_URL } from "../../../config/env"; // ✅ mavjud
 
 function resolveImageUrl(url) {
   if (!url) return "";
-  // ✅ /uploads/... bo‘lsa API_URL bilan yig‘amiz (Renderda ham ishlaydi)
-  if (url.startsWith("/uploads/")) return `${API_URL}${url}`;
+  // ✅ legacy /uploads/... bo‘lsa API_URL bilan yig‘amiz (Renderda ham ishlaydi)
+  if (String(url).startsWith("/uploads/")) return `${API_URL}${url}`;
   return url;
 }
 
@@ -78,7 +78,7 @@ function normalizeTelegram(input) {
 export default function AddProduct() {
   const navigate = useNavigate();
 
-  // ✅ Doimiy placeholder (public/ ichida bo‘lsin)
+  // ✅ UI uchun placeholder (public/ ichida bo‘lsin)
   const DEFAULT_PLACEHOLDER = "/products/no-photo.jpg";
 
   const options = useMemo(() => buildFlatLeafOptions(CATALOG_TREE), []);
@@ -109,7 +109,9 @@ export default function AddProduct() {
   const [telegram, setTelegram] = useState("@");
   const [desc, setDesc] = useState("");
 
-  // ✅ RASM
+  // ✅ RASM (faqat sotuvchi yuklagani DB’ga ketadi)
+  // Bu yerda image — ideal holatda R2 absolute URL bo‘ladi:
+  // https://pub-xxxx.r2.dev/xxxx.jpg
   const [image, setImage] = useState("");
 
   // preview
@@ -117,10 +119,12 @@ export default function AddProduct() {
     () => options.find((o) => o.key === catalogKey) || null,
     [options, catalogKey]
   );
+
   const shownTitle = title.trim() || selected?.title || "Mahsulot";
   const normalizedPhone = useMemo(() => normalizePhoneUZ(phone), [phone]);
 
-  // ✅ Preview’da ham barqaror rasm
+  // ✅ Preview’da: agar sotuvchi rasm qo‘ysa — o‘sha.
+  // Aks holda UI’da category rasm yoki placeholder ko‘rsatamiz (LEKIN DB’ga yozilmaydi).
   const previewImage = image || selected?.img || DEFAULT_PLACEHOLDER;
 
   async function onSubmit(e) {
@@ -140,6 +144,11 @@ export default function AddProduct() {
     if (!isValidPhoneUZ(ph)) return setErr("Telefon raqam noto‘g‘ri. Masalan: +998 90 123 45 67");
     if (!desc.trim() || desc.trim().length < 10) return setErr("Tavsif kamida 10 ta belgidan iborat bo‘lsin.");
 
+    // ✅ MUHIM: rasm majburiy (faqat sotuvchi panelidan qo‘shilgan rasm chiqishi uchun)
+    if (!String(image || "").trim()) {
+      return setErr("Mahsulot rasmi majburiy. Iltimos rasm yuklang.");
+    }
+
     try {
       setSaving(true);
 
@@ -149,8 +158,9 @@ export default function AddProduct() {
         category: catalogKey,
         unit,
 
-        // ✅ bu URL DB ga saqlanadi (agar /uploads/... bo‘lsa keyin Catalog’da API_URL bilan ochiladi)
-        image_url: image || selected?.img || DEFAULT_PLACEHOLDER,
+        // ✅ FAQAT sotuvchi yuklagan URL DB’ga saqlanadi (R2 absolute bo‘lishi kerak)
+        // ❌ selected?.img / placeholder DB’ga yozilmaydi
+        image_url: String(image).trim(),
 
         description: desc.trim(),
 
@@ -166,6 +176,7 @@ export default function AddProduct() {
       };
 
       const created = await createProduct(payload);
+
       if (!created) {
         setErr("Mahsulot qo‘shilmadi. Qayta urinib ko‘ring.");
         showToast("err", "Xatolik", "Mahsulot qo‘shilmadi. Qayta urinib ko‘ring.");
@@ -215,9 +226,6 @@ export default function AddProduct() {
           </button>
 
           <div className="ap-headText">
-            <div className="ap-badge">
-              <span className="ap-dot" /> Seller • Add Product
-            </div>
             <h1 className="ap-title">Mahsulot qo‘shish</h1>
             <p className="ap-sub">Yangi mahsulot e’lonini joylang</p>
           </div>
@@ -256,7 +264,11 @@ export default function AddProduct() {
                 <div className="ap-row2">
                   <label className="ap-field">
                     <span className="ap-label">Hudud</span>
-                    <select className="ap-input" value={region} onChange={(e) => setRegion(e.target.value)}>
+                    <select
+                      className="ap-input"
+                      value={region}
+                      onChange={(e) => setRegion(e.target.value)}
+                    >
                       <option value="Toshkent">Toshkent</option>
                       <option value="Samarqand">Samarqand</option>
                       <option value="Andijon">Andijon</option>
@@ -311,7 +323,11 @@ export default function AddProduct() {
                 </div>
 
                 <label className="ap-toggle">
-                  <input type="checkbox" checked={delivery} onChange={(e) => setDelivery(e.target.checked)} />
+                  <input
+                    type="checkbox"
+                    checked={delivery}
+                    onChange={(e) => setDelivery(e.target.checked)}
+                  />
                   <span>Yetkazib berish bor</span>
                 </label>
 
@@ -340,7 +356,7 @@ export default function AddProduct() {
                   </label>
                 </div>
 
-                {/* ✅ IMAGE UPLOADER */}
+                {/* ✅ IMAGE UPLOADER (R2) */}
                 <ImageUploader label="Mahsulot rasmi" value={image} onChange={setImage} />
 
                 <label className="ap-field">
@@ -387,7 +403,11 @@ export default function AddProduct() {
 
               <div className="ap-previewMedia">
                 {previewImage ? (
-                  <img className="ap-previewImg" src={resolveImageUrl(previewImage)} alt="preview" />
+                  <img
+                    className="ap-previewImg"
+                    src={resolveImageUrl(previewImage)}
+                    alt="preview"
+                  />
                 ) : (
                   <div className="ap-noimg">
                     <ion-icon name="cube-outline" />
@@ -417,7 +437,16 @@ export default function AddProduct() {
                   </span>
                 </div>
 
-                <div className="ap-previewDesc">{desc?.trim() ? desc.trim() : "Tavsif yo‘q."}</div>
+                <div className="ap-previewDesc">
+                  {desc?.trim() ? desc.trim() : "Tavsif yo‘q."}
+                </div>
+
+                {/* ✅ mini indicator: DB’ga faqat image ketadi */}
+                <div className="ap-hint" style={{ marginTop: 10 }}>
+                  {image
+                    ? "✅ Rasm yuklandi (DB’ga R2 URL saqlanadi)"
+                    : "⚠️ Rasm yuklanmagan (submit qilolmaysiz)"}
+                </div>
               </div>
             </div>
 

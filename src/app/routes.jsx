@@ -21,6 +21,7 @@ import Register from "../pages/Auth/Register";
 import NotFound from "../pages/NotFound/NotFound";
 import AddProduct from "../pages/seller/AddProducts/AddProduct";
 import EditProduct from "../pages/seller/EditProduct/EditProduct";
+import AboutProject from "../pages/Home/AboutProject";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
 
       { path: "seller/add-product", element: <AddProduct /> },
       { path: "seller/edit-product/:id", element: <EditProduct /> },
+      {
+        path: "/about",
+        element: <AboutProject />,
+      },
 
       // 404 (eng oxirida tursin)
       { path: "*", element: <NotFound /> },

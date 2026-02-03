@@ -1,0 +1,91 @@
+.partnersV3 {
+  padding: 34px 0 10px;
+}
+
+.partnersHead {
+  margin-bottom: 16px;
+}
+
+.partnersHead h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 950;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.partnersHead p {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* === LOGO TRACK === */
+.partnersTrack {
+  overflow: hidden;
+  border-radius: 18px;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+/* Harakat */
+.partnersRow {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  animation: partnersMove 45s linear infinite;
+}
+
+/* LOGO CARD */
+.partnerLogo {
+  min-width: 180px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+  border: 1px solid rgba(11, 18, 32, 0.08);
+  border-radius: 16px;
+
+  font-weight: 900;
+  font-size: 15px;
+  color: rgba(48, 55, 79, 0.55);
+
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+  transition: all 0.25s ease;
+}
+
+/* Hover = jonlanish */
+.partnerLogo:hover {
+  color: var(--text);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+  border-color: rgba(11, 18, 32, 0.16);
+}
+
+/* Animatsiya */
+@keyframes partnersMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile */
+/* @media (max-width: 560px) {
+  .partnerLogo {
+    min-width: 140px;
+    height: 56px;
+    font-size: 14px;
+  }
+} */

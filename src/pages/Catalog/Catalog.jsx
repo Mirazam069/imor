@@ -417,6 +417,7 @@ function Catalog() {
               ) : (
                 dbItems.map((p) => {
                   const qty = qtyByProductId(p.id);
+                  console.log("IMAGE:", p.id, p.image);
 
                   return (
                     <div key={p.id} className="sub-cardX" title={p.title}>

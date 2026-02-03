@@ -3,6 +3,16 @@ import { useEffect, useMemo, useState } from "react";
 import "./Navbar.css";
 import { useCart } from "../../context/CartContext";
 
+/* ✅ Seller access: local/session storage dan o‘qiymiz */
+function readAuth() {
+  try {
+    const raw = localStorage.getItem("qrs_auth") || sessionStorage.getItem("qrs_auth");
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [q, setQ] = useState("");
@@ -20,7 +30,7 @@ function Navbar() {
     [location.pathname]
   );
 
-  const isSeller = useMemo(
+  const isSellerPath = useMemo(
     () => location.pathname.startsWith("/seller"),
     [location.pathname]
   );
@@ -29,6 +39,12 @@ function Navbar() {
     () => location.pathname.startsWith("/about"),
     [location.pathname]
   );
+
+  /* ✅ Faqat seller login bo‘lsa seller panel ko‘rinadi */
+  const isSellerAuthed = useMemo(() => {
+    const auth = readAuth();
+    return !!auth?.user?.isSeller || auth?.user?.role === "seller";
+  }, [location.pathname]); // login/logoutdan keyin refresh bo‘lishi uchun
 
   useEffect(() => {
     setMenuOpen(false);
@@ -74,6 +90,15 @@ function Navbar() {
   };
 
   const closeMobile = () => setMenuOpen(false);
+
+  const onLogout = () => {
+    try {
+      localStorage.removeItem("qrs_auth");
+      sessionStorage.removeItem("qrs_auth");
+      sessionStorage.removeItem("qrs_redirect");
+    } catch {}
+    navigate("/");
+  };
 
   return (
     <header className="nav">
@@ -146,18 +171,23 @@ function Navbar() {
               </div>
             </div>
 
-            {/* Desktop login (mobileda css yashiradi) */}
-            <NavLink to="/login" className="nav-btn ghost">
-              <ion-icon name="log-in-outline"></ion-icon>
-              Kirish
-            </NavLink>
+            {/* ✅ Login / Logout */}
+            {!isSellerAuthed ? (
+              <NavLink to="/login" className="nav-btn ghost">
+                <ion-icon name="log-in-outline"></ion-icon>
+                Kirish
+              </NavLink>
+            ) : (
+              <button type="button" className="nav-btn ghost" onClick={onLogout}>
+                <ion-icon name="log-out-outline"></ion-icon>
+                Chiqish
+              </button>
+            )}
 
             {/* Cart */}
             <Link to="/cart" className="nav-cart" aria-label="Korzina">
               <ion-icon name="cart-outline"></ion-icon>
-              {cartCount > 0 && (
-                <span className="nav-cart-badge">{cartCount}</span>
-              )}
+              {cartCount > 0 && <span className="nav-cart-badge">{cartCount}</span>}
             </Link>
 
             {/* Burger */}
@@ -195,15 +225,18 @@ function Navbar() {
               IMOR haqida
             </NavLink>
 
-            <NavLink
-              to="/seller/products"
-              className={({ isActive }) =>
-                isActive || isSeller ? "nav-link active" : "nav-link"
-              }
-            >
-              <ion-icon name="briefcase-outline"></ion-icon>
-              Sotuvchi paneli
-            </NavLink>
+            {/* ✅ Seller link: faqat seller login bo‘lsa */}
+            {isSellerAuthed && (
+              <NavLink
+                to="/seller/products"
+                className={({ isActive }) =>
+                  isActive || isSellerPath ? "nav-link active" : "nav-link"
+                }
+              >
+                <ion-icon name="briefcase-outline"></ion-icon>
+                Sotuvchi paneli
+              </NavLink>
+            )}
           </nav>
         </div>
       </div>
@@ -220,7 +253,7 @@ function Navbar() {
           role="dialog"
           aria-label="Mobile menu"
         >
-          {/* ✅ Close row (≤430px da X chiqadi) */}
+          {/* ✅ Close row */}
           <div className="nav-mobile-head">
             <div className="nav-mobile-title">Menyu</div>
             <button
@@ -233,7 +266,7 @@ function Navbar() {
             </button>
           </div>
 
-          {/* ✅ Mobile search (ezilmaydi, button kabi) */}
+          {/* ✅ Mobile search */}
           <form className="nav-search mobile" onSubmit={onSubmit}>
             <span className="nav-search-icon">
               <ion-icon name="search-outline"></ion-icon>
@@ -259,25 +292,43 @@ function Navbar() {
             IMOR haqida
           </NavLink>
 
-          <NavLink to="/seller/products" className="nav-mobile-link" onClick={closeMobile}>
-            <ion-icon name="briefcase-outline"></ion-icon>
-            Sotuvchi paneli
-          </NavLink>
+          {/* ✅ Seller link mobile: faqat seller login bo‘lsa */}
+          {isSellerAuthed && (
+            <NavLink
+              to="/seller/products"
+              className="nav-mobile-link"
+              onClick={closeMobile}
+            >
+              <ion-icon name="briefcase-outline"></ion-icon>
+              Sotuvchi paneli
+            </NavLink>
+          )}
 
-          {/* ❌ E’lon joylash olib tashlandi (mobileda ham yo‘q) */}
-
-          <NavLink to="/login" className="nav-mobile-link" onClick={closeMobile}>
-            <ion-icon name="log-in-outline"></ion-icon>
-            Kirish
-          </NavLink>
+          {/* ✅ Login/Logout mobile */}
+          {!isSellerAuthed ? (
+            <NavLink to="/login" className="nav-mobile-link" onClick={closeMobile}>
+              <ion-icon name="log-in-outline"></ion-icon>
+              Kirish
+            </NavLink>
+          ) : (
+            <button
+              type="button"
+              className="nav-mobile-link nav-mobile-logout"
+              onClick={() => {
+                closeMobile();
+                onLogout();
+              }}
+            >
+              <ion-icon name="log-out-outline"></ion-icon>
+              Chiqish
+            </button>
+          )}
 
           <NavLink to="/cart" className="nav-mobile-link" onClick={closeMobile}>
             <ion-icon name="cart-outline"></ion-icon>
             Korzina
             {cartCount > 0 && (
-              <span style={{ marginLeft: 8, fontWeight: 900 }}>
-                ({cartCount})
-              </span>
+              <span style={{ marginLeft: 8, fontWeight: 900 }}>({cartCount})</span>
             )}
           </NavLink>
 

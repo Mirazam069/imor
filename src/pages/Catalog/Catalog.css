@@ -1,23 +1,46 @@
-/* Catalog.css — IMOR global tokens bilan mos */
+/* =========================
+   IMOR Catalog.css (FULL)
+   JSX classlar: catalog-page, catalog-wrap, cat-side, cat-h1,
+   panel, panel-head, panel-title,
+   tree, tree-node, tree-row, tree-btn, tree-branch, tree-line,
+   tree-text, tree-toggle, tree-children,
+   cat-main, topbar, crumb, sep, strong,
+   cartBtn, cartCount,
+   cards-grid, sub-cardX, sub-head, sub-media, sub-img, sub-noimg,
+   sub-badge, sub-foot, sub-title, sub-go,
+   sub-actions, price, price-num, price-unit, btnRow,
+   buyBtn, qtyBox, qtyBtn, qtyNum,
+   empty, empty-ic, empty-title, empty-sub
+========================= */
 
+/* Page + local tokens */
 .catalog-page {
+  --cat-accent: var(--nav-accent, var(--accent, #F8AD40));
+  --cat-ink: var(--text, #0b1220);
+  --cat-muted: var(--muted, rgba(11, 18, 32, 0.68));
+  --cat-stroke: var(--stroke, rgba(11, 18, 32, 0.10));
+  --cat-radius: var(--radius, 18px);
+
   background: var(--bg, #f7f7f7);
   min-height: calc(100vh - 70px);
   padding: 18px 0 44px;
 }
 
+/* Wrapper layout */
 .catalog-wrap {
-  max-width: 1440px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 10px 40px 8px;
 
   display: grid;
   grid-template-columns: 340px 1fr;
   gap: 18px;
   align-items: start;
-  padding: 10px 40px 8px;
 }
 
-/* ===== LEFT ===== */
+/* =========================
+   LEFT
+========================= */
 .cat-side {
   position: sticky;
   top: 18px;
@@ -25,44 +48,32 @@
 
 .cat-h1 {
   margin: 0 0 12px;
-  color: var(--text, #0b1220);
   font-size: 34px;
   font-weight: 900;
   letter-spacing: -0.03em;
+  color: var(--cat-ink);
 }
 
+/* Panel */
 .panel {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--stroke, rgba(11, 18, 32, 0.1));
-  border-radius: var(--radius, 18px);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--cat-stroke);
+  border-radius: var(--cat-radius);
   overflow: hidden;
   box-shadow: 0 14px 45px rgba(0, 0, 0, 0.06);
 }
 
-.panel + .panel {
-  margin-top: 12px;
-}
-
 .panel-head {
   width: 100%;
-  padding: 12px 12px;
+  padding: 12px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
 
-  background: rgba(247, 247, 247, 0.7);
-  border-bottom: 1px solid var(--stroke, rgba(11, 18, 32, 0.1));
-}
-
-.panel-head.clickable {
-  cursor: pointer;
-  background: rgba(247, 247, 247, 0.75);
-  transition: 0.18s ease;
-}
-
-.panel-head.clickable:hover {
-  filter: brightness(0.99);
+  background: rgba(247, 247, 247, 0.85);
+  border-bottom: 1px solid var(--cat-stroke);
 }
 
 .panel-title {
@@ -70,7 +81,7 @@
   align-items: center;
   gap: 10px;
 
-  color: var(--text, #0b1220);
+  color: var(--cat-ink);
   font-size: 13px;
   font-weight: 900;
   letter-spacing: -0.01em;
@@ -78,86 +89,12 @@
 
 .panel-title ion-icon {
   font-size: 18px;
-  color: rgba(11, 18, 32, 0.7);
+  color: var(--cat-muted);
 }
 
-.panel-chevron {
-  font-size: 18px;
-  color: rgba(11, 18, 32, 0.62);
-}
-
-.panel-body {
-  padding: 12px;
-}
-
-.panel.filter .panel-body {
-  display: grid;
-  gap: 10px;
-}
-
-/* ===== Check (manufacturers) ===== */
-.check {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 10px 10px;
-  border-radius: 14px;
-  border: 1px solid var(--stroke, rgba(11, 18, 32, 0.1));
-  background: rgba(255, 255, 255, 0.75);
-  transition: 0.18s ease;
-  cursor: pointer;
-  user-select: none;
-}
-
-.check:hover {
-  transform: translateY(-1px);
-  border-color: rgba(59, 130, 246, 0.22);
-  background: rgba(59, 130, 246, 0.06);
-}
-
-.check input {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--accent, #3b82f6);
-}
-
-.check span {
-  font-size: 12.5px;
-  font-weight: 800;
-  color: rgba(11, 18, 32, 0.86);
-}
-
-.filter-all {
-  margin-top: 6px;
-  height: 40px;
-  border-radius: 14px;
-  border: 1px solid rgba(59, 130, 246, 0.22);
-  background: rgba(59, 130, 246, 0.08);
-  color: var(--text, #0b1220);
-  font-weight: 900;
-  font-size: 12px;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  transition: 0.18s ease;
-}
-
-.filter-all ion-icon {
-  font-size: 18px;
-}
-
-.filter-all:hover {
-  transform: translateY(-1px);
-  background: rgba(59, 130, 246, 0.12);
-  border-color: rgba(59, 130, 246, 0.32);
-}
-
-/* ===== Tree ===== */
+/* =========================
+   TREE
+========================= */
 .tree {
   padding: 10px;
   display: grid;
@@ -168,28 +105,31 @@
   border-radius: 14px;
 }
 
+/* Row */
 .tree-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
 
-  padding: 8px 8px;
+  padding: 8px;
   border-radius: 14px;
+
   border: 1px solid transparent;
   transition: 0.18s ease;
 }
 
 .tree-row:hover {
-  background: rgba(59, 130, 246, 0.06);
-  border-color: rgba(59, 130, 246, 0.18);
+  background: color-mix(in srgb, var(--cat-accent) 8%, transparent);
+  border-color: color-mix(in srgb, var(--cat-accent) 22%, transparent);
 }
 
 .tree-row.active {
-  background: rgba(59, 130, 246, 0.10);
-  border-color: rgba(59, 130, 246, 0.28);
+  background: color-mix(in srgb, var(--cat-accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--cat-accent) 40%, transparent);
 }
 
+/* Left clickable */
 .tree-btn {
   flex: 1;
   display: flex;
@@ -201,25 +141,27 @@
   cursor: pointer;
   text-align: left;
   padding: 0;
-
-  color: var(--text, #0b1220);
 }
 
+/* Branch icon */
 .tree-branch {
   width: 18px;
   height: 18px;
   border-radius: 8px;
-  border: 1px solid var(--stroke, rgba(11, 18, 32, 0.12));
-  background: rgba(255, 255, 255, 0.75);
+
+  border: 1px solid var(--cat-stroke);
+  background: rgba(255, 255, 255, 0.9);
+
   display: grid;
   place-items: center;
+  flex: 0 0 auto;
 }
 
 .tree-line {
   width: 8px;
   height: 2px;
-  border-radius: 9px;
-  background: rgba(11, 18, 32, 0.55);
+  border-radius: 999px;
+  background: rgba(11, 18, 32, 0.60);
 }
 
 .tree-text {
@@ -233,30 +175,34 @@
   color: rgba(11, 18, 32, 0.96);
 }
 
+/* Toggle */
 .tree-toggle {
   width: 32px;
   height: 32px;
   border-radius: 12px;
-  border: 1px solid var(--stroke, rgba(11, 18, 32, 0.12));
-  background: rgba(255, 255, 255, 0.78);
-  cursor: pointer;
 
+  border: 1px solid var(--cat-stroke);
+  background: rgba(255, 255, 255, 0.92);
+
+  cursor: pointer;
   display: grid;
   place-items: center;
   transition: 0.18s ease;
+  flex: 0 0 auto;
 }
 
 .tree-toggle ion-icon {
   font-size: 18px;
-  color: rgba(11, 18, 32, 0.65);
+  color: rgba(11, 18, 32, 0.64);
 }
 
 .tree-toggle:hover {
   transform: translateY(-1px);
-  border-color: rgba(59, 130, 246, 0.22);
-  background: rgba(59, 130, 246, 0.06);
+  background: color-mix(in srgb, var(--cat-accent) 10%, #fff);
+  border-color: color-mix(in srgb, var(--cat-accent) 40%, transparent);
 }
 
+/* Children */
 .tree-children {
   margin: 8px 0 0 14px;
   padding-left: 10px;
@@ -266,17 +212,21 @@
   gap: 6px;
 }
 
-/* ===== RIGHT ===== */
+/* =========================
+   RIGHT
+========================= */
 .cat-main {
   min-width: 0;
 }
 
+/* Topbar */
 .topbar {
   margin-bottom: 14px;
-  padding: 12px 12px;
-  border-radius: var(--radius, 18px);
-  border: 1px solid var(--stroke, rgba(11, 18, 32, 0.1));
-  background: rgba(255, 255, 255, 0.8);
+  padding: 12px;
+
+  border-radius: var(--cat-radius);
+  border: 1px solid var(--cat-stroke);
+  background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 14px 45px rgba(0, 0, 0, 0.06);
 
   display: flex;
@@ -289,7 +239,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: rgba(11, 18, 32, 0.68);
+
+  color: var(--cat-muted);
   font-size: 12.5px;
   font-weight: 800;
 }
@@ -308,20 +259,21 @@
   font-weight: 900;
 }
 
-/* Mini cart */
+/* Cart button */
 .cartBtn {
   height: 40px;
   padding: 0 12px;
   border-radius: 14px;
-  border: 1px solid rgba(59, 130, 246, 0.22);
-  background: rgba(59, 130, 246, 0.08);
-  cursor: pointer;
 
+  border: 1px solid color-mix(in srgb, var(--cat-accent) 35%, transparent);
+  background: color-mix(in srgb, var(--cat-accent) 12%, transparent);
+
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
 
-  color: var(--text, #0b1220);
+  color: var(--cat-ink);
   font-weight: 900;
   font-size: 12px;
   transition: 0.18s ease;
@@ -333,8 +285,12 @@
 
 .cartBtn:hover {
   transform: translateY(-1px);
-  background: rgba(59, 130, 246, 0.12);
-  border-color: rgba(59, 130, 246, 0.32);
+  background: color-mix(in srgb, var(--cat-accent) 18%, transparent);
+  border-color: color-mix(in srgb, var(--cat-accent) 55%, transparent);
+}
+
+.cartBtn:active {
+  transform: translateY(0px);
 }
 
 .cartCount {
@@ -342,39 +298,51 @@
   height: 22px;
   padding: 0 7px;
   border-radius: 999px;
-  background: var(--accent, #3b82f6);
-  color: #fff;
+
+  background: var(--cat-accent);
+  color: #111; /* sariq ustida oq yo‘qolib ketmasin */
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 950;
 
   display: grid;
   place-items: center;
 }
 
-/* ===== Cards grid ===== */
-/* ✅ Desktop: 3 ta */
+/* =========================
+   GRID
+========================= */
+
+/* Default: 3 cards */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
-.cards-grid.subcats .sub-cardX,
-.cards-grid.products .sub-cardX {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--stroke, rgba(11, 18, 32, 0.1));
+/* Large desktop (keng ekran) — 4 cards qilish ixtiyoriy chiroyli chiqadi */
+@media (min-width: 1460px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Card */
+.sub-cardX {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--cat-stroke);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 14px 45px rgba(0, 0, 0, 0.06);
   transition: 0.18s ease;
+  will-change: transform;
 }
 
 .sub-cardX:hover {
   transform: translateY(-2px);
-  border-color: rgba(59, 130, 246, 0.22);
+  border-color: color-mix(in srgb, var(--cat-accent) 55%, transparent);
 }
 
-/* Card head button */
+/* clickable head */
 .sub-head {
   width: 100%;
   border: 0;
@@ -390,9 +358,12 @@
 }
 
 .sub-img {
-  height: 150px;
-  background: rgba(11, 18, 32, 0.06);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;   /* MUHIM */
   overflow: hidden;
+  border-radius: 14px;
+  background: #f3f3f3;
 }
 
 .sub-img img {
@@ -400,6 +371,10 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.sub-cardX:hover .sub-img img {
+  transform: scale(1.045);
 }
 
 .sub-noimg {
@@ -411,6 +386,7 @@
   font-size: 26px;
 }
 
+/* Badge */
 .sub-badge {
   position: absolute;
   left: 12px;
@@ -422,9 +398,11 @@
 
   padding: 7px 10px;
   border-radius: 999px;
+
   border: 1px solid rgba(255, 255, 255, 0.55);
   background: rgba(11, 18, 32, 0.45);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: #fff;
 
   font-size: 11px;
@@ -439,6 +417,7 @@
 /* Foot */
 .sub-foot {
   padding: 12px 12px 10px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -461,10 +440,13 @@
   width: 34px;
   height: 34px;
   border-radius: 14px;
-  border: 1px solid var(--stroke, rgba(11, 18, 32, 0.1));
-  background: rgba(247, 247, 247, 0.7);
+
+  border: 1px solid var(--cat-stroke);
+  background: rgba(247, 247, 247, 0.85);
+
   display: grid;
   place-items: center;
+  transition: 0.18s ease;
 }
 
 .sub-go ion-icon {
@@ -472,10 +454,15 @@
   color: rgba(11, 18, 32, 0.62);
 }
 
+.sub-cardX:hover .sub-go {
+  border-color: color-mix(in srgb, var(--cat-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--cat-accent) 10%, rgba(247,247,247,.9));
+}
+
 /* Actions */
 .sub-actions {
   padding: 10px 12px 12px;
-  border-top: 1px solid var(--stroke, rgba(11, 18, 32, 0.1));
+  border-top: 1px solid var(--cat-stroke);
 
   display: flex;
   align-items: center;
@@ -511,15 +498,16 @@
   height: 38px;
   padding: 0 12px;
   border-radius: 14px;
-  border: 1px solid rgba(59, 130, 246, 0.22);
-  background: rgba(59, 130, 246, 0.10);
-  cursor: pointer;
 
+  border: 1px solid color-mix(in srgb, var(--cat-accent) 40%, transparent);
+  background: color-mix(in srgb, var(--cat-accent) 18%, transparent);
+
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 
-  color: var(--text, #0b1220);
+  color: var(--cat-ink);
   font-weight: 950;
   font-size: 12px;
   transition: 0.18s ease;
@@ -531,16 +519,20 @@
 
 .buyBtn:hover {
   transform: translateY(-1px);
-  background: rgba(59, 130, 246, 0.14);
-  border-color: rgba(59, 130, 246, 0.32);
+  background: color-mix(in srgb, var(--cat-accent) 26%, transparent);
+  border-color: color-mix(in srgb, var(--cat-accent) 70%, transparent);
+}
+
+.buyBtn:active {
+  transform: translateY(0px);
 }
 
 /* Qty box */
 .qtyBox {
   height: 38px;
   border-radius: 14px;
-  border: 1px solid var(--stroke, rgba(11, 18, 32, 0.12));
-  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--cat-stroke);
+  background: rgba(255, 255, 255, 0.90);
   display: inline-flex;
   align-items: center;
   overflow: hidden;
@@ -559,11 +551,11 @@
 
 .qtyBtn ion-icon {
   font-size: 18px;
-  color: rgba(11, 18, 32, 0.7);
+  color: rgba(11, 18, 32, 0.70);
 }
 
 .qtyBtn:hover:not(:disabled) {
-  background: rgba(59, 130, 246, 0.08);
+  background: color-mix(in srgb, var(--cat-accent) 16%, transparent);
 }
 
 .qtyBtn:disabled {
@@ -579,13 +571,16 @@
   color: rgba(11, 18, 32, 0.92);
 }
 
-/* ===== Empty states ===== */
+/* =========================
+   EMPTY STATES
+========================= */
 .empty {
   grid-column: 1 / -1;
   padding: 22px 14px;
-  border-radius: var(--radius, 18px);
+
+  border-radius: var(--cat-radius);
   border: 1px dashed rgba(11, 18, 32, 0.18);
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.88);
   text-align: center;
 }
 
@@ -594,8 +589,9 @@
   height: 56px;
   margin: 0 auto 10px;
   border-radius: 18px;
-  border: 1px solid var(--stroke, rgba(11, 18, 32, 0.12));
-  background: rgba(247, 247, 247, 0.7);
+
+  border: 1px solid var(--cat-stroke);
+  background: rgba(247, 247, 247, 0.85);
   display: grid;
   place-items: center;
 }
@@ -620,10 +616,41 @@
   line-height: 1.45;
 }
 
-/* ===== Responsive ===== */
+/* =========================
+   ACCESSIBILITY / FOCUS
+========================= */
+.cartBtn:focus-visible,
+.tree-btn:focus-visible,
+.tree-toggle:focus-visible,
+.sub-head:focus-visible,
+.buyBtn:focus-visible,
+.qtyBtn:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--cat-accent) 45%, transparent);
+  outline-offset: 2px;
+  border-radius: 14px;
+}
+
+/* =========================
+   RESPONSIVE (IDEAL)
+========================= */
+
+/* 1200px dan past: padding ozgina kamayadi, grid 2 column bo‘ladi */
+@media (max-width: 1200px) {
+  .catalog-wrap {
+    padding: 10px 24px 8px;
+    grid-template-columns: 320px 1fr;
+  }
+
+  .sub-img {
+    height: 160px;
+  }
+}
+
+/* Tablet: sidebar yuqoriga, grid 2 column */
 @media (max-width: 980px) {
   .catalog-wrap {
     grid-template-columns: 1fr;
+    padding: 10px 20px 8px;
   }
 
   .cat-side {
@@ -634,47 +661,33 @@
     font-size: 30px;
   }
 
-  /* ✅ Tablet: 2 ta */
+  .topbar {
+    flex-wrap: wrap;
+  }
+
   .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sub-img {
-    height: 165px;
+    height: 170px;
   }
 }
 
-@media (max-width: 560px) {
-  .catalog-page {
-    padding: 14px 0 34px;
-  }
-
-  .catalog-wrap {
-    width: min(1100px, calc(100% - 24px));
-  }
-
-  /* ✅ Mobile: 1 ta */
+/* Small tablet / large phone: grid 1 column bo‘lishi yaxshiroq */
+@media (max-width: 700px) {
   .cards-grid {
     grid-template-columns: 1fr;
   }
 
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .cartBtn {
-    width: 100%;
-    justify-content: space-between;
-  }
-
   .sub-img {
-    height: 185px;
+    height: 190px;
   }
 
   .sub-actions {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
   }
 
   .btnRow {
@@ -684,5 +697,55 @@
   .buyBtn {
     flex: 1;
     justify-content: center;
+  }
+}
+
+/* Mobile: topbar stack, cartBtn full width */
+@media (max-width: 560px) {
+  .catalog-page {
+    padding: 14px 0 34px;
+  }
+
+  .catalog-wrap {
+    padding: 0 12px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .cartBtn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sub-img {
+    height: 200px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 420px) {
+  .cat-h1 {
+    font-size: 26px;
+  }
+
+  .sub-img {
+    height: 185px;
+  }
+
+  .qtyBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .qtyBox {
+    height: 36px;
+  }
+
+  .buyBtn {
+    height: 36px;
   }
 }

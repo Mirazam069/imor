@@ -1,6 +1,10 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+import RecommendedProducts from "./sections/RecommendedProducts";
+import PartnerBrands from "./sections/PartnerBrands";
 
 import Banner1 from "../images/banner1.png";
 import Banner2 from "../images/banner1.png";
@@ -80,175 +84,253 @@ function Home() {
 
   const go = (idx) => setActive(idx);
 
+  /* Motion */
+  const heroWrap = {
+    hidden: { opacity: 0, y: 14 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.08 },
+    },
+  };
+
+  const heroItem = {
+    hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+    show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+  };
+
+  const slideVariants = {
+    initial: { opacity: 0, y: 10, scale: 0.995 },
+    animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } },
+    exit: { opacity: 0, y: -10, scale: 0.995, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } },
+  };
+
+  const sectionWrap = {
+    hidden: { opacity: 0, y: 14 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+  };
+
+  const gridWrap = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+  };
+
+  const cardItem = {
+    hidden: { opacity: 0, y: 10, scale: 0.995 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } },
+  };
+
+  const b = banners[active];
+
   return (
-    <div className="home">
+    <div className="home dot-bg">
       {/* HERO */}
       <section className="heroV2">
         <div className="container">
-          <div className="heroCard">
+          <motion.div className="heroCard" variants={heroWrap} initial="hidden" animate="show">
             {/* LEFT */}
-            <div className="heroLeft">
-              <h1 className="heroTitle">
+            <motion.div className="heroLeft" variants={heroItem}>
+              <motion.h1 className="heroTitle" variants={heroItem}>
                 O‘zbekiston­dagi{" "}
                 <span className="heroAccent">qurilish materiallari</span>
                 <br /> bitta joyda
-              </h1>
+              </motion.h1>
 
-              <p className="heroSubtitle">
+              <motion.p className="heroSubtitle" variants={heroItem}>
                 Materiallarni narx, hudud va kategoriya bo‘yicha toping.
                 Sotuvchilar uchun — e’lon joylash juda oson.
-              </p>
+              </motion.p>
 
-              <div className="heroActions">
-                <Link className="hbtn primary" to="/catalog">
-                  <ion-icon name="grid-outline"></ion-icon>
-                  Katalogga o‘tish
-                </Link>
-
-                <Link className="hbtn ghost" to="/seller/add">
-                  <ion-icon name="add-circle-outline"></ion-icon>
-                  E’lon joylash
-                </Link>
-              </div>
-            </div>
-
-            {/* RIGHT */}
-            <div className="heroRight">
-              <div className="qs2">
-                <div className="qs2Head">
-                  <div className="qs2Title">
-                    <ion-icon name="flash-outline"></ion-icon>
-                    Tez qidiruv
-                  </div>
-                  <div className="qs2Hint">Katalogga tez o‘tish</div>
-                </div>
-
-                <div className="qs2Search">
-                  <ion-icon name="search-outline"></ion-icon>
-                  <input className="qs2Input" placeholder="Masalan: g‘isht, sement..." />
-                  <Link className="qs2Go" to="/catalog" aria-label="Search">
-                    <ion-icon name="arrow-forward-outline"></ion-icon>
+              <motion.div className="heroActions" variants={heroItem}>
+                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                  <Link className="hbtn primary" to="/catalog">
+                    <ion-icon name="grid-outline"></ion-icon>
+                    Katalogga o‘tish
                   </Link>
-                </div>
+                </motion.div>
 
-                <div className="qs2Chips">
-                  <Link className="qs2Chip" to="/catalog?q=g%CA%BBisht">G‘isht</Link>
-                  <Link className="qs2Chip" to="/catalog?q=sement">Sement</Link>
-                  <Link className="qs2Chip" to="/catalog?q=armatura">Armatura</Link>
-                  <Link className="qs2Chip" to="/catalog?q=qum">Qum</Link>
-                  <Link className="qs2Chip" to="/catalog?q=shag%CA%BBal">Shag‘al</Link>
-                </div>
+                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                  <Link className="hbtn ghost" to="/about">
+                    Batafsil ma'lumot
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </motion.div>
 
-                <div className="qs2Grid">
-                  <div className="qs2Item">
-                    <div className="qs2K">Hudud</div>
-                    <div className="qs2V">Toshkent</div>
-                  </div>
-                  <div className="qs2Item">
-                    <div className="qs2K">Narx</div>
-                    <div className="qs2V">arzon → qimmat</div>
-                  </div>
-                  <div className="qs2Item">
-                    <div className="qs2K">Yetkazish</div>
-                    <div className="qs2V">bor / yo‘q</div>
-                  </div>
-                  <div className="qs2Item">
-                    <div className="qs2K">Sotuvchi</div>
-                    <div className="qs2V">tekshirilgan</div>
-                  </div>
-                </div>
+            {/* RIGHT (✅ Minimal carousel — frame yo‘q, dots rasm ichida) */}
+            <motion.div className="heroRight" variants={heroItem}>
+              <motion.div
+                className="heroCarousel"
+                initial={{ opacity: 0, y: 12, scale: 0.995 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="heroCarouselViewport">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={active}
+                      className="heroCarouselSlide"
+                      variants={slideVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                    >
+                      <motion.img
+                        className="heroCarouselImg"
+                        src={b.img}
+                        alt=""
+                        initial={{ scale: 1.02 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                      />
 
-                <div className="qs2Note">
-                  <ion-icon name="bulb-outline"></ion-icon>
-                  <span>Tezroq qurishni boshlang.</span>
+                      {/* overlay */}
+                      <div className="heroOverlay">
+                        <div className="heroOverlayTop">
+                          <div className="heroOverlayIcon">
+                            <ion-icon name={b.icon}></ion-icon>
+                          </div>
+                        </div>
+
+                        <div className="heroOverlayText">
+                          <div className="heroOverlayTitle">{b.title}</div>
+                          <div className="heroOverlayDesc">{b.desc}</div>
+
+                          <motion.div whileHover={{ x: 2 }} whileTap={{ scale: 0.98 }} style={{ display: "inline-flex" }}>
+                            <Link to={b.to} className="heroOverlayCta">
+                              {b.cta}
+                              <span className="heroOverlayArrow">
+                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                              </span>
+                            </Link>
+                          </motion.div>
+                        </div>
+
+                        {/* dots (inside image) */}
+                        <div className="heroDots">
+                          {banners.map((_, idx) => (
+                            <motion.button
+                              key={idx}
+                              className={idx === active ? "dot active" : "dot"}
+                              onClick={() => go(idx)}
+                              aria-label={`Banner ${idx + 1}`}
+                              type="button"
+                              whileHover={{ scale: 1.12 }}
+                              whileTap={{ scale: 0.92 }}
+                              transition={{ duration: 0.15 }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
-
-      {/* BANNER CAROUSEL */}
-      {/* <section className="bannerV2">
-        <div className="container">
-          <div className="bannerWrap">
-            <div className="bannerSlider">
-              {banners.map((b, idx) => (
-                <div
-                  key={idx}
-                  className={idx === active ? "bannerSlide active" : "bannerSlide"}
-                >
-                  <img className="bannerImg" src={b.img} alt="" />
-
-                  <div className="bannerInner">
-                    <div className="bannerIcon">
-                      <ion-icon name={b.icon}></ion-icon>
-                    </div>
-
-                    <div className="bannerContent">
-                      <div className="bannerTitle">{b.title}</div>
-                      <div className="bannerDesc">{b.desc}</div>
-
-                      <Link to={b.to} className="bannerCta">
-                        {b.cta}
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bannerDots">
-              {banners.map((_, idx) => (
-                <button
-                  key={idx}
-                  className={idx === active ? "dot active" : "dot"}
-                  onClick={() => go(idx)}
-                  aria-label={`Banner ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section> */}
 
       {/* ✅ MASHHUR MATERIAL LAR (CTA dan oldin) */}
-      <section className="popularV2">
+      <motion.section
+        className="popularV2"
+        variants={sectionWrap}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+      >
         <div className="container">
           <div className="popularHead">
-            <h2 className="popularTitle">Mashhur materiallar</h2>
+            <motion.h2
+              className="popularTitle"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Mashhur materiallar
+            </motion.h2>
           </div>
 
-          <div className="popularGrid">
+          <motion.div
+            className="popularGrid"
+            variants={gridWrap}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {popularMaterials.map((m) => (
-              <Link key={m.key} to={m.to} className="popularCard">
-                <div className="popularImgBox">
-                  <img className="popularImg" src={m.img} alt={m.label} />
-                </div>
-                <div className="popularLabel">{m.label}</div>
-              </Link>
+              <motion.div
+                key={m.key}
+                variants={cardItem}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.18 }}
+              >
+                <Link to={m.to} className="popularCard">
+                  <motion.div className="popularImgBox" whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
+                    <motion.img
+                      className="popularImg"
+                      src={m.img}
+                      alt={m.label}
+                      whileHover={{ scale: 1.04 }}
+                      transition={{ duration: 0.22 }}
+                    />
+                  </motion.div>
+
+                  <motion.div className="popularLabel" initial={{ opacity: 0.92 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.18 }}>
+                    {m.label}
+                  </motion.div>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
+
+      <RecommendedProducts />
+      <PartnerBrands />
 
       {/* CTA */}
-      <section className="ctaV2">
+      <motion.section
+        className="ctaV2"
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="container">
-          <div className="ctaBox">
+          <motion.div className="ctaBox" whileHover={{ y: -2 }} transition={{ duration: 0.18 }}>
             <div>
-              <h2>Material sotasizmi?</h2>
-              <p>Bitta e’lon qo‘ying — yaqin xaridorlar o‘zlari bog‘lanadi.</p>
+              <motion.h2
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Material sotasizmi?
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ delay: 0.06, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Bitta e’lon qo‘ying — yaqin xaridorlar o‘zlari bog‘lanadi.
+              </motion.p>
             </div>
 
-            <Link className="hbtn primary" to="/seller/add">
-              <ion-icon name="add-circle-outline"></ion-icon>
-              E’lon joylash
-            </Link>
-          </div>
+            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              <Link className="hbtn primary" to="/seller/add">
+                <ion-icon name="add-circle-outline"></ion-icon>
+                E’lon joylash
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
+
+
     </div>
   );
 }

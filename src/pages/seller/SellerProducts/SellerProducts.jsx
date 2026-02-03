@@ -16,17 +16,27 @@ function pickImageUrl(p) {
     (Array.isArray(p?.images) ? p.images[0] : null);
 
   if (!u) return "";
-
-  // ✅ base64 data URL bo‘lsa — o‘z holicha
   if (String(u).startsWith("data:")) return u;
-
-  // ✅ absolute yoki relative bo‘lsa ham backendga to‘g‘rilab beradi
   return resolveBackendUrl(u);
 }
 
 function formatUZS(n) {
   const s = String(Math.round(Number(n || 0)));
   return s.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
+function formatDateTime(value) {
+  if (!value) return "—";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return String(value);
+
+  // YYYY-MM-DD HH:mm
+  const yy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mi = String(d.getMinutes()).padStart(2, "0");
+  return `${yy}-${mm}-${dd} ${hh}:${mi}`;
 }
 
 const DEFAULT_SELLER_ID = "s_1";
@@ -114,56 +124,47 @@ export default function SellerProducts() {
 
   if (loading) {
     return (
-      <div className="sps-wrap">
-        <div className="sps-container">
-          <div className="sps-loading">Yuklanmoqda...</div>
+      <div className="spx-wrap">
+        <div className="spx-container">
+          <div className="spx-loading">Yuklanmoqda...</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="sps-wrap">
-      <div className="sps-container">
-        <div className="sps-head">
-          <div className="sps-left">
-            <div className="sps-badge">
-              <span className="sps-dot" /> Sotuvchi • Mahsulotlar
-            </div>
-            <h1 className="sps-title">Mahsulotlarim</h1>
-            <div className="sps-sub">
-              {seller ? (
-                <>
-                  <span className="sps-pill">
-                    <ion-icon name="storefront-outline"></ion-icon>
-                    {seller.name}
-                  </span>
-                  <span className="sps-pill ghost">
-                    <ion-icon name="location-outline"></ion-icon>
-                    {seller.region || "—"}
-                  </span>
-                </>
-              ) : (
-                <span className="sps-pill ghost">Seller topilmadi (demo)</span>
-              )}
+    <div className="spx-wrap">
+      <div className="spx-container">
+        {/* ===== Header ===== */}
+        <div className="spx-head">
+          <div className="spx-left">
+
+            <h1 className="spx-title">Mahsulotlarim</h1>
+
+            <div className="spx-sub">
+              <span className="spx-pill ghost">
+                <ion-icon name="location-outline"></ion-icon>
+                {seller?.region || "—"}
+              </span>
             </div>
           </div>
 
-          <div className="sps-actions">
-            <Link className="sps-btn ghost" to={`/seller/${sellerId}`}>
+          <div className="spx-actions">
+            <Link className="spx-btn ghost" to={`/seller/${sellerId}`}>
               <ion-icon name="person-outline"></ion-icon>
               Profil
             </Link>
 
-            <Link className="sps-btn" to="/seller/add-product">
+            <Link className="spx-btn" to="/seller/add-product">
               <ion-icon name="add-outline"></ion-icon>
               Mahsulot qo‘shish
             </Link>
           </div>
         </div>
 
-        <div className="sps-toolbar">
-          <div className="sps-search">
+        {/* ===== Toolbar ===== */}
+        <div className="spx-toolbar">
+          <div className="spx-search">
             <ion-icon name="search-outline"></ion-icon>
             <input
               value={q}
@@ -172,87 +173,92 @@ export default function SellerProducts() {
             />
           </div>
 
-          <label className="sps-toggle">
-            <input type="checkbox" checked={onlyActive} onChange={(e) => setOnlyActive(e.target.checked)} />
+          <label className="spx-toggle">
+            <input
+              type="checkbox"
+              checked={onlyActive}
+              onChange={(e) => setOnlyActive(e.target.checked)}
+            />
             <span>Faqat aktiv</span>
           </label>
 
-          <div className="sps-count">
+          <div className="spx-count">
             <b>{filtered.length}</b> ta
           </div>
         </div>
 
         {err ? (
-          <div className="sps-error" role="alert">
+          <div className="spx-error" role="alert">
             <ion-icon name="alert-circle-outline"></ion-icon>
             <span>{err}</span>
           </div>
         ) : null}
 
+        {/* ===== List ===== */}
         {filtered.length ? (
-          <div className="sps-grid">
-            {filtered.map((p) => {
+          <div className="spx-list">
+            {filtered.map((p, idx) => {
               const img = pickImageUrl(p);
+              const when = formatDateTime(p.updatedAt || p.createdAt);
 
               return (
-                <div key={p.id} className="sps-card">
-                  <div className="sps-cardTop">
-                    <div className="sps-thumb">
-                      {img ? (
-                        <img
-                          src={img}
-                          alt={p.title || "product"}
-                          loading="lazy"
-                          onError={(e) => {
-                            e.currentTarget.style.display = "none";
-                          }}
-                        />
-                      ) : (
-                        <div className="sps-thumbEmpty">
-                          <ion-icon name="cube-outline"></ion-icon>
-                        </div>
-                      )}
+                <div key={p.id} className="spx-row">
+                  {/* index */}
+                  <div className="spx-idx">
+                    <span>{idx + 1}</span>
+                  </div>
+
+                  {/* thumb */}
+                  <div className="spx-thumb">
+                    {img ? (
+                      <img
+                        src={img}
+                        alt={p.title || "product"}
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                    ) : (
+                      <div className="spx-thumbEmpty">
+                        <ion-icon name="cube-outline"></ion-icon>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* main */}
+                  <div className="spx-main">
+                    <div className="spx-topline">
+                      <div className="spx-name">{p.title || "Mahsulot"}</div>
+
+                      {/* right mini meta */}
+                      <div className="spx-metaRight">
+                        <span className="spx-chip ghost">
+                          <ion-icon name="calendar-outline"></ion-icon>
+                          {when}
+                        </span>
+                      </div>
                     </div>
 
-                    <div className="sps-cardTitle">
-                      <div className="sps-name">{p.title || "Mahsulot"}</div>
-                      <div className="sps-muted">
-                        <span className={`sps-status ${p.status === "draft" ? "draft" : "active"}`}>
-                          {p.status === "draft" ? "Draft" : "Aktiv"}
+                    <div className="spx-bottomline">
+                      <div className="spx-price">
+                        {p.price ? `${formatUZS(p.price)} so‘m` : "Narx yo‘q"}
+                        {p.unit ? <span className="spx-unit"> / {p.unit}</span> : null}
+                      </div>
+
+                      <div className="spx-chips">
+                        <span className="spx-chip">
+                          <ion-icon name="location-outline"></ion-icon>
+                          {p.region || seller?.region || "—"}
                         </span>
-                        <span className="sps-dotSep">•</span>
-                        <span>ID: {p.id}</span>
-                        {p.catalogKey ? (
-                          <>
-                            <span className="sps-dotSep">•</span>
-                            <span>Key: {p.catalogKey}</span>
-                          </>
-                        ) : null}
                       </div>
                     </div>
                   </div>
 
-                  <div className="sps-meta">
-                    <div className="sps-price">
-                      {p.price ? `${formatUZS(p.price)} so‘m` : "Narx yo‘q"}
-                      {p.unit ? <span className="sps-unit"> / {p.unit}</span> : null}
-                    </div>
-
-                    <div className="sps-miniMeta">
-                      <span className="sps-chip">
-                        <ion-icon name="location-outline"></ion-icon>
-                        {p.region || seller?.region || "—"}
-                      </span>
-                      <span className="sps-chip ghost">
-                        <ion-icon name="calendar-outline"></ion-icon>
-                        {p.updatedAt || p.createdAt || "—"}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="sps-cardActions">
+                  {/* actions */}
+                  <div className="spx-actionsCol">
                     <button
-                      className="sps-btnSm ghost"
+                      className="spx-btnSm"
                       type="button"
                       onClick={() => navigate(`/seller/edit-product/${p.id}`)}
                     >
@@ -261,7 +267,7 @@ export default function SellerProducts() {
                     </button>
 
                     <button
-                      className="sps-btnSm danger"
+                      className="spx-btnSm danger"
                       type="button"
                       onClick={() => onDelete(p.id)}
                       disabled={deletingId === p.id}
@@ -275,11 +281,13 @@ export default function SellerProducts() {
             })}
           </div>
         ) : (
-          <div className="sps-empty">
+          <div className="spx-empty">
             <ion-icon name="information-circle-outline"></ion-icon>
             <div>
               <b>Mahsulot topilmadi</b>
-              <div className="sps-emptySub">Yangi mahsulot qo‘shish uchun tepdagi tugmani bosing.</div>
+              <div className="spx-emptySub">
+                Yangi mahsulot qo‘shish uchun tepdagi tugmani bosing.
+              </div>
             </div>
           </div>
         )}

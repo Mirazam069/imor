@@ -1,27 +1,16 @@
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
-function safeGetRedirect() {
-  try {
-    const r = sessionStorage.getItem("qrs_redirect");
-    return r && r.startsWith("/") ? r : "/catalog";
-  } catch {
-    return "/catalog";
-  }
+const SELLER_PHONE = "+998971566805";
+const SELLER_PASSWORD = "12345wwwq";
+
+function normalizePhone(p) {
+  return String(p || "").replace(/[^\d+]/g, "");
 }
 
 function Login() {
   const navigate = useNavigate();
-
-  const demoUsers = useMemo(
-    () => [
-      { phone: "+998901112233", password: "123456", role: "buyer", name: "Demo Buyer" },
-      { phone: "+998909998877", password: "123456", role: "seller", name: "Demo Seller" },
-      { phone: "+998901234567", password: "123456", role: "admin", name: "Demo Admin" },
-    ],
-    []
-  );
 
   const [form, setForm] = useState({
     phone: "+998",
@@ -47,8 +36,6 @@ function Login() {
     setForm((p) => ({ ...p, [key]: v }));
   };
 
-  const normalizePhone = (p) => String(p || "").replace(/[^\d+]/g, "");
-
   const validate = () => {
     const p = normalizePhone(form.phone);
     if (!p.trim() || p.trim().length < 7) return "Telefon raqam kiriting";
@@ -56,31 +43,28 @@ function Login() {
     return "";
   };
 
-  const loginDemo = async () => {
+  const onLogin = async () => {
     const err = validate();
-    if (err) {
-      showToast(err, "bad");
-      return;
-    }
+    if (err) return showToast(err, "bad");
 
     setLoading(true);
     try {
-      // Demo auth: phone+password match
       const p = normalizePhone(form.phone);
-      const user = demoUsers.find((u) => u.phone === p && u.password === form.password);
 
-      if (!user) {
+      const isSeller = p === SELLER_PHONE && form.password === SELLER_PASSWORD;
+
+      if (!isSeller) {
         showToast("Telefon yoki parol noto‘g‘ri", "bad");
         return;
       }
 
-      const token = `demo_${user.role}_${Date.now()}`;
       const payload = {
-        token,
+        token: `imor_seller_${Date.now()}`,
         user: {
-          name: user.name,
-          phone: user.phone,
-          role: user.role,
+          name: "IMOR Seller",
+          phone: SELLER_PHONE,
+          role: "seller",
+          isSeller: true,
         },
         createdAt: new Date().toISOString(),
       };
@@ -92,9 +76,7 @@ function Login() {
       }
 
       showToast("Kirish muvaffaqiyatli ✅", "ok");
-
-      const redirectTo = safeGetRedirect();
-      setTimeout(() => navigate(redirectTo), 550);
+      setTimeout(() => navigate("/seller/products"), 450);
     } catch {
       showToast("Xatolik: qayta urinib ko‘ring", "bad");
     } finally {
@@ -102,96 +84,82 @@ function Login() {
     }
   };
 
-  const fillDemo = (type) => {
-    const u =
-      type === "seller"
-        ? demoUsers[1]
-        : type === "admin"
-        ? demoUsers[2]
-        : demoUsers[0];
-
-    setForm((p) => ({
-      ...p,
-      phone: u.phone,
-      password: u.password,
-    }));
-    showToast(`Demo ${u.role} tanlandi`, "ok");
-  };
-
   return (
-    <div className="login">
-      <div className="login-wrap">
+    <div className="lx-page">
+      <div className="lx-wrap">
         {/* Header */}
-        <div className="login-head">
-          <div>
-            <div className="login-badge">
-              <ion-icon name="log-in-outline"></ion-icon>
-              <span>Kirish</span>
-            </div>
-
-            <h1 className="login-title">Hisobingizga kiring</h1>
-            <p className="login-sub">
-              Hozircha demo rejim: login backend ulanmaguncha localStorage/sessionStorage orqali
-              ishlaydi.
-            </p>
+        <header className="lx-head">
+          <div className="lx-badge">
+            <ion-icon name="log-in-outline"></ion-icon>
+            <span>Kirish</span>
           </div>
 
-          <div className="login-actions">
-            <Link to="/" className="btn ghost">
+          <h1 className="lx-title">Hisobingizga kiring</h1>
+          <p className="lx-sub">Sotuvchi paneli faqat maxsus account orqali ko‘rinadi.</p>
+
+          <div className="lx-links">
+            <Link to="/" className="lx-link">
               <ion-icon name="home-outline"></ion-icon>
-              Bosh sahifa
+              <span>Bosh sahifa</span>
             </Link>
-            <Link to="/catalog" className="btn ghost">
+            <Link to="/catalog" className="lx-link">
               <ion-icon name="grid-outline"></ion-icon>
-              Katalog
+              <span>Katalog</span>
             </Link>
           </div>
-        </div>
+        </header>
 
-        <div className="login-grid">
-          {/* LEFT: FORM */}
-          <div className="login-card">
-            <div className="login-card-top">
-              <div className="login-card-title">
+        {/* Center */}
+        <main className="lx-center">
+          <div className="lx-card">
+            <div className="lx-cardTop">
+              <div className="lx-cardTitle">
                 <ion-icon name="shield-checkmark-outline"></ion-icon>
                 <span>Login</span>
               </div>
-
-              <div className="login-card-note">Demo • MVP</div>
+              <div className="lx-chip">Seller access</div>
             </div>
 
-            <div className="login-card-body">
-              <label className="field">
-                <span className="label">Telefon</span>
-                <div className="withIcon">
-                  <span className="ic">
+            <div className="lx-cardBody">
+              {/* Phone */}
+              <label className="lx-field">
+                <span className="lx-label">Telefon</span>
+                <div className="lx-inputWrap">
+                  <span className="lx-ic">
                     <ion-icon name="call-outline"></ion-icon>
                   </span>
                   <input
-                    className="input"
+                    className="lx-input"
                     value={form.phone}
                     onChange={onChange("phone")}
-                    placeholder="+998 90 123 45 67"
+                    placeholder="+998 97 156 68 05"
+                    inputMode="tel"
+                    autoComplete="tel"
                   />
                 </div>
               </label>
 
-              <label className="field">
-                <span className="label">Parol</span>
-                <div className="withIcon">
-                  <span className="ic">
+              {/* Password */}
+              <label className="lx-field">
+                <span className="lx-label">Parol</span>
+                <div className="lx-inputWrap">
+                  <span className="lx-ic">
                     <ion-icon name="key-outline"></ion-icon>
                   </span>
                   <input
-                    className="input"
+                    className="lx-input"
                     type={showPass ? "text" : "password"}
                     value={form.password}
                     onChange={onChange("password")}
                     placeholder="••••••"
+                    autoComplete="current-password"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") onLogin();
+                    }}
                   />
                   <button
                     type="button"
-                    className="eye"
+                    className="lx-eye"
                     onClick={() => setShowPass((p) => !p)}
                     aria-label="Show password"
                     title={showPass ? "Yashirish" : "Ko‘rsatish"}
@@ -201,8 +169,9 @@ function Login() {
                 </div>
               </label>
 
-              <div className="login-row">
-                <label className="check">
+              {/* Row */}
+              <div className="lx-row">
+                <label className="lx-check">
                   <input
                     type="checkbox"
                     checked={form.remember}
@@ -213,110 +182,39 @@ function Login() {
 
                 <button
                   type="button"
-                  className="linkBtn"
+                  className="lx-forgot"
                   onClick={() => showToast("Parol tiklash keyin qo‘shiladi", "ok")}
                 >
                   Parolni unutdingizmi?
                 </button>
               </div>
 
-              <button className="btn primary full" type="button" onClick={loginDemo} disabled={loading}>
+              {/* Primary button (BU endi 100% ishlaydi) */}
+              <button
+                type="button"
+                className="lx-btnPrimary"
+                onClick={onLogin}
+                disabled={loading}
+              >
                 <ion-icon name={loading ? "time-outline" : "log-in-outline"}></ion-icon>
-                {loading ? "Kirilmoqda..." : "Kirish"}
+                <span>{loading ? "Kirilmoqda..." : "Kirish"}</span>
               </button>
 
-              <div className="or">
-                <span />
-                <div>Demo bilan to‘ldirish</div>
-                <span />
-              </div>
-
-              <div className="demoRow">
-                <button type="button" className="demoBtn" onClick={() => fillDemo("buyer")}>
-                  <ion-icon name="person-outline"></ion-icon>
-                  Buyer
-                </button>
-                <button type="button" className="demoBtn" onClick={() => fillDemo("seller")}>
-                  <ion-icon name="storefront-outline"></ion-icon>
-                  Seller
-                </button>
-                <button type="button" className="demoBtn" onClick={() => fillDemo("admin")}>
-                  <ion-icon name="settings-outline"></ion-icon>
-                  Admin
-                </button>
-              </div>
-
-              <div className="hint">
+              <div className="lx-note">
                 <ion-icon name="information-circle-outline"></ion-icon>
-                <span>
-                  Demo parol: <b>123456</b>. Keyin `auth.api.js` bilan real backend ulanadi.
-                </span>
+                <span>Bu sahifa vaqtinchalik faqat admin uchun.</span>
               </div>
             </div>
           </div>
-
-          {/* RIGHT: QUICK CARD */}
-          <aside className="login-side">
-            <div className="qs-card">
-              <div className="qs-top">
-                <span className="qs-dot red" />
-                <span className="qs-dot yellow" />
-                <span className="qs-dot green" />
-              </div>
-
-              <div className="qs-body">
-                <h3 className="qs-title">Kirishdan keyin</h3>
-
-                <div className="qs-search">
-                  <ion-icon name="flash-outline"></ion-icon>
-                  <div className="qs-placeholder">Sotuvchi bo‘lsangiz — e’lon joylaysiz</div>
-                </div>
-
-                <div className="qs-chips">
-                  <span className="qs-chip">E’lonlar</span>
-                  <span className="qs-chip">Profil</span>
-                  <span className="qs-chip">Statistika</span>
-                  <span className="qs-chip">Sozlamalar</span>
-                </div>
-
-                <div className="qs-grid">
-                  <div className="qs-item">
-                    <div className="qs-k">Tezlik</div>
-                    <div className="qs-v">1 daqiqada</div>
-                  </div>
-
-                  <div className="qs-item">
-                    <div className="qs-k">Aloqa</div>
-                    <div className="qs-v">24/7</div>
-                  </div>
-
-                  <div className="qs-item">
-                    <div className="qs-k">Filtr</div>
-                    <div className="qs-v">hudud/narx</div>
-                  </div>
-
-                  <div className="qs-item">
-                    <div className="qs-k">Maqsad</div>
-                    <div className="qs-v">MVP</div>
-                  </div>
-                </div>
-
-                <div className="qs-note">
-                  <ion-icon name="bulb-outline"></ion-icon>
-                  <span>Backend ulanmaguncha demo auth bilan UI’ni tugatamiz.</span>
-                </div>
-              </div>
-            </div>
-          </aside>
-        </div>
+        </main>
       </div>
 
       {/* Toast */}
-      <div className={toast.open ? `toastX open ${toast.type}` : "toastX"}>
-        <div className="toastX-ic">
+      <div className={toast.open ? `lx-toast open ${toast.type}` : "lx-toast"}>
+        <div className="lx-toastIc">
           <ion-icon name={toast.type === "ok" ? "checkmark-outline" : "warning-outline"}></ion-icon>
         </div>
-        <div className="toastX-text">{toast.text}</div>
+        <div className="lx-toastText">{toast.text}</div>
       </div>
     </div>
   );
