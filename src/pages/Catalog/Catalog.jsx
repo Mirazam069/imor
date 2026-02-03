@@ -1,23 +1,17 @@
 import "./Catalog.css";
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CATALOG_TREE, MANUFACTURERS } from "./catalogData";
+import { CATALOG_TREE } from "./catalogData";
 import { useCart } from "../../context/CartContext";
 import { getProducts } from "../../api/products.api";
 import { API_URL } from "../../config/env";
-
-
-
 
 // ✅ API_URL dan uploads uchun toza origin yasaymiz
 const API_ORIGIN = (() => {
   const raw = String(API_URL || "").trim().replace(/\/+$/g, "");
   if (!raw) return "";
-
-  // agar API_URL /api bilan tugasa, olib tashlaymiz (upload odatda /uploads da bo‘ladi)
   return raw.replace(/\/api$/i, "");
 })();
-
 
 /* ===== Helpers ===== */
 function findNodeByKey(tree, key) {
@@ -38,14 +32,11 @@ function resolveImageUrl(url) {
   if (u.startsWith("data:image")) return u;
   if (/^https?:\/\//i.test(u)) return u;
 
-  // "/uploads/xxx.jpg" yoki "uploads/xxx.jpg" -> "https://domain/uploads/xxx.jpg"
   if (u.startsWith("/uploads/")) return `${API_ORIGIN}${u}`;
   if (u.startsWith("uploads/")) return `${API_ORIGIN}/${u}`;
 
-  // boshqa relative bo‘lsa (masalan /images/..)
   return u;
 }
-
 
 function findPath(tree, key, path = []) {
   for (const n of tree) {
@@ -103,13 +94,10 @@ function Catalog() {
   const [activeKey, setActiveKey] = useState(defaultKey);
   const [openKeys, setOpenKeys] = useState(() => findPath(CATALOG_TREE, defaultKey) || []);
 
-  const [manufacturersOpen, setManufacturersOpen] = useState(true);
-  const [selectedM, setSelectedM] = useState(["Rossiya", "O‘zbekiston"]);
-
   // ✅ DB products state (leaf bo‘lsa ishlaydi)
   const [dbLoading, setDbLoading] = useState(false);
   const [dbError, setDbError] = useState("");
-  const [dbItems, setDbItems] = useState([]); // UI objects from products.api.js
+  const [dbItems, setDbItems] = useState([]);
 
   // 🛒 Cart
   const { cart, cartCount, addToCart, removeFromCart } = useCart();
@@ -165,18 +153,10 @@ function Catalog() {
     const p = findPath(CATALOG_TREE, key);
     if (p) setOpenKeys(p);
 
-    // URLga ham yozib qo‘yamiz (refresh bo‘lsa ham category saqlanadi)
     const next = new URLSearchParams(window.location.search);
     next.set("category", key);
     next.delete("q");
     navigate(`/catalog?${next.toString()}`);
-  };
-
-  const toggleManufacturer = (name) => {
-    setSelectedM((prev) => {
-      if (prev.includes(name)) return prev.filter((x) => x !== name);
-      return [...prev, name];
-    });
   };
 
   const buyNowLeafProduct = (p) => {
@@ -230,7 +210,7 @@ function Catalog() {
       setDbError("");
       try {
         const res = await getProducts({
-          catalogKey: activeKey, // ⚠️ DB category shu key bilan mos bo‘lsin
+          catalogKey: activeKey,
           status: "active",
           sort: "new",
           page: 1,
@@ -299,13 +279,7 @@ function Catalog() {
               <span className="strong">{activeNode?.title || "Bo‘lim"}</span>
             </div>
 
-            {/* Mini Cart badge */}
-            <button
-              className="cartBtn"
-              type="button"
-              title="Korzina"
-              onClick={() => navigate("/cart")}
-            >
+            <button className="cartBtn" type="button" title="Korzina" onClick={() => navigate("/cart")}>
               <ion-icon name="cart-outline"></ion-icon>
               <span>Korzina</span>
               <span className="cartCount">{cartCount}</span>
@@ -417,19 +391,14 @@ function Catalog() {
               ) : (
                 dbItems.map((p) => {
                   const qty = qtyByProductId(p.id);
-                  console.log("IMAGE:", p.id, p.image);
 
                   return (
                     <div key={p.id} className="sub-cardX" title={p.title}>
-                      <button
-                        className="sub-head"
-                        onClick={() => navigate(`/product/${p.id}`)}
-                        type="button"
-                      >
+                      <button className="sub-head" onClick={() => navigate(`/product/${p.id}`)} type="button">
                         <div className="sub-media">
                           <div className="sub-img">
-                            {p.image  ? (
-                              <img src={resolveImageUrl(p.image )} alt={p.title} />
+                            {p.image ? (
+                              <img src={resolveImageUrl(p.image)} alt={p.title} />
                             ) : (
                               <div className="sub-noimg">
                                 <ion-icon name="image-outline" />
@@ -453,9 +422,7 @@ function Catalog() {
 
                       <div className="sub-actions">
                         <div className="price">
-                          <div className="price-num">
-                            {p.price ? `${formatUZS(p.price)} so‘m` : "Narx yo‘q"}
-                          </div>
+                          <div className="price-num">{p.price ? `${formatUZS(p.price)} so‘m` : "Narx yo‘q"}</div>
                           <div className="price-unit">{p.unit ? `/${p.unit}` : ""}</div>
                         </div>
 
@@ -472,12 +439,7 @@ function Catalog() {
                             Sotib olish
                           </button>
 
-                          <div
-                            className="qtyBox"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                            }}
-                          >
+                          <div className="qtyBox" onClick={(e) => e.stopPropagation()}>
                             <button
                               className="qtyBtn"
                               type="button"
@@ -525,7 +487,6 @@ function TreeNode({ node, openKeys, activeKey, onToggle, onSelect, level }) {
           <span className="tree-branch">
             <span className="tree-line" />
           </span>
-
           <span className="tree-text">{node.title}</span>
         </button>
 
@@ -554,8 +515,5 @@ function TreeNode({ node, openKeys, activeKey, onToggle, onSelect, level }) {
     </div>
   );
 }
-
-
-
 
 export default Catalog;

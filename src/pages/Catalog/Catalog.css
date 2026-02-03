@@ -1,16 +1,5 @@
 /* =========================
    IMOR Catalog.css (FULL)
-   JSX classlar: catalog-page, catalog-wrap, cat-side, cat-h1,
-   panel, panel-head, panel-title,
-   tree, tree-node, tree-row, tree-btn, tree-branch, tree-line,
-   tree-text, tree-toggle, tree-children,
-   cat-main, topbar, crumb, sep, strong,
-   cartBtn, cartCount,
-   cards-grid, sub-cardX, sub-head, sub-media, sub-img, sub-noimg,
-   sub-badge, sub-foot, sub-title, sub-go,
-   sub-actions, price, price-num, price-unit, btnRow,
-   buyBtn, qtyBox, qtyBtn, qtyNum,
-   empty, empty-ic, empty-title, empty-sub
 ========================= */
 
 /* Page + local tokens */
@@ -28,24 +17,31 @@
 
 /* Wrapper layout */
 .catalog-wrap {
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 10px 40px 8px;
 
   display: grid;
   grid-template-columns: 340px 1fr;
+  grid-template-areas: "side main";
   gap: 18px;
   align-items: start;
+}
+
+.cat-side {
+  grid-area: side;
+  position: sticky;
+  top: 18px;
+}
+
+.cat-main {
+  grid-area: main;
+  min-width: 0;
 }
 
 /* =========================
    LEFT
 ========================= */
-.cat-side {
-  position: sticky;
-  top: 18px;
-}
-
 .cat-h1 {
   margin: 0 0 12px;
   font-size: 34px;
@@ -105,7 +101,6 @@
   border-radius: 14px;
 }
 
-/* Row */
 .tree-row {
   display: flex;
   align-items: center;
@@ -129,7 +124,6 @@
   border-color: color-mix(in srgb, var(--cat-accent) 40%, transparent);
 }
 
-/* Left clickable */
 .tree-btn {
   flex: 1;
   display: flex;
@@ -143,7 +137,6 @@
   padding: 0;
 }
 
-/* Branch icon */
 .tree-branch {
   width: 18px;
   height: 18px;
@@ -175,7 +168,6 @@
   color: rgba(11, 18, 32, 0.96);
 }
 
-/* Toggle */
 .tree-toggle {
   width: 32px;
   height: 32px;
@@ -202,7 +194,6 @@
   border-color: color-mix(in srgb, var(--cat-accent) 40%, transparent);
 }
 
-/* Children */
 .tree-children {
   margin: 8px 0 0 14px;
   padding-left: 10px;
@@ -213,13 +204,8 @@
 }
 
 /* =========================
-   RIGHT
+   TOPBAR
 ========================= */
-.cat-main {
-  min-width: 0;
-}
-
-/* Topbar */
 .topbar {
   margin-bottom: 14px;
   padding: 12px;
@@ -243,6 +229,7 @@
   color: var(--cat-muted);
   font-size: 12.5px;
   font-weight: 800;
+  min-width: 0;
 }
 
 .crumb ion-icon {
@@ -257,6 +244,9 @@
 .strong {
   color: rgba(11, 18, 32, 0.92);
   font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Cart button */
@@ -277,6 +267,7 @@
   font-weight: 900;
   font-size: 12px;
   transition: 0.18s ease;
+  flex: 0 0 auto;
 }
 
 .cartBtn ion-icon {
@@ -300,7 +291,7 @@
   border-radius: 999px;
 
   background: var(--cat-accent);
-  color: #111; /* sariq ustida oq yo‘qolib ketmasin */
+  color: #111;
   font-size: 12px;
   font-weight: 950;
 
@@ -319,13 +310,6 @@
   gap: 14px;
 }
 
-/* Large desktop (keng ekran) — 4 cards qilish ixtiyoriy chiroyli chiqadi */
-@media (min-width: 1460px) {
-  .cards-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
 /* Card */
 .sub-cardX {
   background: rgba(255, 255, 255, 0.95);
@@ -342,7 +326,6 @@
   border-color: color-mix(in srgb, var(--cat-accent) 55%, transparent);
 }
 
-/* clickable head */
 .sub-head {
   width: 100%;
   border: 0;
@@ -358,9 +341,8 @@
 }
 
 .sub-img {
-  position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;   /* MUHIM */
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 14px;
   background: #f3f3f3;
@@ -371,6 +353,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 180ms ease;
 }
 
 .sub-cardX:hover .sub-img img {
@@ -447,6 +430,7 @@
   display: grid;
   place-items: center;
   transition: 0.18s ease;
+  flex: 0 0 auto;
 }
 
 .sub-go ion-icon {
@@ -456,7 +440,7 @@
 
 .sub-cardX:hover .sub-go {
   border-color: color-mix(in srgb, var(--cat-accent) 55%, transparent);
-  background: color-mix(in srgb, var(--cat-accent) 10%, rgba(247,247,247,.9));
+  background: color-mix(in srgb, var(--cat-accent) 10%, rgba(247, 247, 247, 0.9));
 }
 
 /* Actions */
@@ -511,6 +495,7 @@
   font-weight: 950;
   font-size: 12px;
   transition: 0.18s ease;
+  white-space: nowrap;
 }
 
 .buyBtn ion-icon {
@@ -536,6 +521,7 @@
   display: inline-flex;
   align-items: center;
   overflow: hidden;
+  flex: 0 0 auto;
 }
 
 .qtyBtn {
@@ -634,22 +620,21 @@
    RESPONSIVE (IDEAL)
 ========================= */
 
-/* 1200px dan past: padding ozgina kamayadi, grid 2 column bo‘ladi */
+/* 1200px dan past: padding kamayadi */
 @media (max-width: 1200px) {
   .catalog-wrap {
     padding: 10px 24px 8px;
     grid-template-columns: 320px 1fr;
   }
-
-  .sub-img {
-    height: 160px;
-  }
 }
 
-/* Tablet: sidebar yuqoriga, grid 2 column */
+/* 980px dan past: 1 column (default stack) */
 @media (max-width: 980px) {
   .catalog-wrap {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "side"
+      "main";
     padding: 10px 20px 8px;
   }
 
@@ -668,20 +653,56 @@
   .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  .sub-img {
-    height: 170px;
+/* ✅ SENGA KERAK: 720px da MAIN tepada, ASIDE pastda */
+@media (max-width: 720px) {
+  .catalog-wrap {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "main"
+      "side";
+    padding: 10px 14px 8px;
+  }
+
+  /* aside sticky bo‘lmasin */
+  .cat-side {
+    position: static;
+    top: auto;
+  }
+
+  /* topbar chiroyli stack */
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .cartBtn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* ✅ 720 dan pastda ham 2 ta bo‘lib qoladi */
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .sub-foot {
+    gap: 10px;
+  }
+
+  .sub-go {
+    width: 32px;
+    height: 32px;
   }
 }
 
-/* Small tablet / large phone: grid 1 column bo‘lishi yaxshiroq */
+/* ✅ 700px — SEN AYTGANDAY: 1 ta qilmaymiz, 2 ta qoladi */
 @media (max-width: 700px) {
   .cards-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sub-img {
-    height: 190px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sub-actions {
@@ -700,52 +721,115 @@
   }
 }
 
-/* Mobile: topbar stack, cartBtn full width */
-@media (max-width: 560px) {
-  .catalog-page {
-    padding: 14px 0 34px;
-  }
+/* =========================
+   360px – 560px (IDEAL MOBILE)
+========================= */
+@media (max-width: 560px) and (min-width: 360px) {
 
-  .catalog-wrap {
-    padding: 0 12px;
-  }
-
-  .topbar {
-    flex-direction: column;
-    align-items: stretch;
+  /* GRID — doim 2 tadan */
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
-  .cartBtn {
+  /* CARD */
+  .sub-cardX {
+    border-radius: 16px;
+  }
+
+  /* IMAGE */
+  .sub-img {
+    aspect-ratio: 3 / 2;
+    border-radius: 12px;
+  }
+
+  /* BADGE */
+  .sub-badge {
+    display: none;
+  }
+
+  .sub-badge ion-icon {
+    font-size: 13px;
+  }
+
+  /* FOOT */
+  .sub-foot {
+    padding: 8px 8px 6px;
+    gap: 8px;
+  }
+
+  .sub-title {
+    font-size: 12px;
+    line-height: 1.25;
+    -webkit-line-clamp: 2;
+  }
+
+  .sub-go {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+  .sub-go ion-icon {
+    font-size: 16px;
+  }
+
+  /* ACTIONS */
+  .sub-actions {
+    padding: 6px 8px 8px;
+    gap: 6px;
+  }
+
+  .price-num {
+    font-size: 12px;
+  }
+
+  .price-unit {
+    display: none;
+  }
+
+  /* BUTTON ROW */
+  .btnRow {
+    gap: 6px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* BUY BUTTON */
+  .buyBtn {
+    height: 32px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 11px;
+    gap: 5px;
     width: 100%;
-    justify-content: space-between;
   }
 
-  .sub-img {
-    height: 200px;
-  }
-}
-
-/* Very small phones */
-@media (max-width: 420px) {
-  .cat-h1 {
-    font-size: 26px;
+  .buyBtn ion-icon {
+    font-size: 15px;
   }
 
-  .sub-img {
-    height: 185px;
+  /* QTY */
+  .qtyBox {
+    display: none;
   }
 
   .qtyBtn {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+    line-height: 0;
+
+    display: grid;
+    place-items: center;
   }
 
-  .qtyBox {
-    height: 36px;
+  .qtyBtn ion-icon {
+    font-size: 17px; /* + / - aniq */
+    line-height: 1;
   }
 
-  .buyBtn {
-    height: 36px;
+  .qtyNum {
+    width: 28px;
+    font-size: 11px;
   }
 }

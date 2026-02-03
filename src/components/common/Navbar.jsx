@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import "./Navbar.css";
 import { useCart } from "../../context/CartContext";
+import Logo from '../Logo.png';
 
 /* ✅ Seller access: local/session storage dan o‘qiymiz */
 function readAuth() {
@@ -107,9 +108,7 @@ function Navbar() {
         <div className="nav-row nav-row-top">
           {/* Logo */}
           <Link to="/" className="brand">
-            <span className="brand-mark">
-              <ion-icon name="cube-outline"></ion-icon>
-            </span>
+              <img src={Logo} alt="IMOR.UZ Logo" style={{width: '54px', height: '54px'}}/>
             <span className="brand-text">
               IMOR<span className="brand-accent">.UZ</span>
             </span>

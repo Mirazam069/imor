@@ -277,6 +277,10 @@ POPULAR MATERIALS
   color: var(--text);
 }
 
+/* =========================
+POPULAR MATERIALS (FIXED)
+========================= */
+
 .popularGrid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -287,26 +291,36 @@ POPULAR MATERIALS
   text-decoration: none;
   color: inherit;
   display: grid;
-  grid-template-rows: 170px auto;
+  grid-template-rows: auto; /* ✅ 170px ni olib tashlaymiz */
   gap: 12px;
 }
 
+/* ✅ Kvadrat media + markazlashtirish */
 .popularImgBox {
   background: #fff;
   border: 1px solid rgba(11, 18, 32, 0.08);
   border-radius: 16px;
+
+  /* ✅ HAR DOIM KVADRAT */
+  aspect-ratio: 1 / 1;
+
+  /* ✅ TRUE CENTER */
   display: grid;
   place-items: center;
+
   overflow: hidden;
   box-shadow: 0 10px 22px rgba(15, 23, 42, 0.04);
-  transition: border-color 180ms ease, box-shadow 180ms ease;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
+/* ✅ Rasm kattaroq + markazda */
 .popularImg {
-  width: 78%;
-  height: 78%;
+  width: 90%;
+  height: 90%;
   object-fit: contain;
-  transform: translateY(2px);
+  display: block;          /* ✅ baseline muammosi yo‘q */
+  margin: auto;            /* ✅ aniq center */
+  transform: none;         /* ✅ translateY olib tashlandi */
 }
 
 .popularLabel {
@@ -320,7 +334,9 @@ POPULAR MATERIALS
 .popularCard:hover .popularImgBox {
   border-color: rgba(11, 18, 32, 0.14);
   box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+  transform: translateY(-2px);
 }
+
 
 /* =========================
 CTA
@@ -387,9 +403,9 @@ Responsive
     gap: 14px;
   }
 
-  .popularCard {
+  /* .popularCard {
     grid-template-rows: 110px auto;
-  }
+  } */
 }
 
 @media (max-width: 560px) {
@@ -410,6 +426,40 @@ Responsive
   .ctaBox {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .heroSubtitle{
+    display: none;
+  }
+  .nav-row{
+    margin: 0 10px;
+  }
+}
+
+/* =========================
+POPULAR MATERIALS — 360px
+========================= */
+@media (max-width: 360px) {
+  .popularGrid {
+    gap: 10px;
+  }
+
+  .popularImgBox {
+    border-radius: 14px;
+    aspect-ratio: 1 / 1; /* yana qat’iy */
+  }
+
+  .popularImg {
+    width: 92%;
+    height: 92%;
+  }
+
+  .popularLabel {
+    font-size: 12px;
+    line-height: 1.2;
+    padding: 0 2px;
+  }
+  .nav-lang {
+    display: none;
   }
 }
 
