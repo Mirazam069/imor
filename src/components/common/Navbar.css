@@ -31,6 +31,28 @@
   border-top: 1px solid rgba(48, 55, 79, 0.08);
 }
 
+/* =========================
+   ✅ FIX: iOS default blue + small icons (NAV ONLY)
+   Faqat navbar ichidagi button/link/selectlar uchun reset
+========================= */
+.nav button,
+.nav a,
+.nav [role="button"],
+.nav select {
+  -webkit-appearance: none;
+  appearance: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
+.nav button:focus,
+.nav a:focus,
+.nav [role="button"]:focus,
+.nav select:focus {
+  outline: none;
+}
+
 /* ===== BRAND ===== */
 .brand {
   display: inline-flex;
@@ -58,6 +80,8 @@
 .brand-text {
   color: var(--nav-ink);
   letter-spacing: -0.02em;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .brand-accent { color: var(--nav-accent); }
@@ -176,7 +200,7 @@
   color: rgba(48, 55, 79, 0.65);
 }
 
-.nav-lang-code { font-weight: 900; }
+.nav-lang-code { font-weight: 600; }
 .nav-lang-chev { opacity: 0.8; }
 
 .nav-lang-menu {
@@ -307,6 +331,15 @@
   height: 46px;
   border-radius: 14px;
   cursor: pointer;
+
+  /* ✅ FIX: iOS’da default blue chiqmasin */
+  color: var(--nav-ink);
+}
+
+/* ✅ FIX: icon ham aniq rang + o‘lcham (kichik bo‘lib qolmasin) */
+.nav-burger ion-icon {
+  font-size: 22px;
+  color: var(--nav-ink);
 }
 
 /* ================= MOBILE MENU ================= */

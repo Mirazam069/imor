@@ -1,57 +1,101 @@
+/* ProductDetails.css — IMOR Token-Only (New Colors) */
+
+/* =========================
+   Base
+========================= */
 .pd-wrap {
-  background: #f7f7f7;
+  background: var(--bg);
   min-height: 100vh;
 }
 
 .pd-container {
-  max-width: 1100px;
+  width: min(1440px, 100%);
   margin: 0 auto;
-  padding: 22px 16px 92px;
-  color: #0b1220;
+  padding: 10px 40px 8px;
+  color: var(--text);
   font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
+/* =========================
+   Back button
+========================= */
 .pd-back {
-  border: 1px solid rgba(11, 18, 32, 0.12);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid var(--stroke);
+  background: color-mix(in srgb, var(--nav-surface) 78%, transparent);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
   padding: 10px 14px;
-  border-radius: 14px;
+  border-radius: 16px;
+
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--text) 10%, transparent);
 }
 
+.pd-back:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--nav-surface) 92%, transparent);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--text) 16%, transparent);
+}
+
+.pd-back:active {
+  transform: translateY(0px);
+}
+
+/* =========================
+   Breadcrumb
+========================= */
 .pd-crumb {
   margin-top: 12px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  font-weight: 800;
+
+  font-weight: 900;
   font-size: 12px;
-  opacity: 0.85;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
 }
 
 .pd-crumbItem {
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  opacity: 0.92;
 }
 
-.pd-crumbSep {
-  opacity: 0.6;
-}
-
-.pd-crumbStrong {
-  font-weight: 900;
+.pd-crumbItem:hover {
   opacity: 1;
 }
 
+.pd-crumbSep {
+  opacity: 0.55;
+}
+
+.pd-crumbStrong {
+  font-weight: 1000;
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+}
+
+/* =========================
+   Grid
+========================= */
 .pd-grid {
   margin-top: 14px;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 18px;
+  align-items: start;
 }
 
 .pd-left,
@@ -61,54 +105,76 @@
   gap: 14px;
 }
 
+/* =========================
+   Cover
+========================= */
 .pd-cover {
   position: relative;
   border-radius: 22px;
   overflow: hidden;
-  border: 1px solid rgba(11, 18, 32, 0.08);
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(11, 18, 32, 0.06);
+
+  border: 1px solid var(--stroke);
+  background: var(--nav-surface);
+
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--text) 10%, transparent);
 }
 
 .pd-cover img {
   width: 100%;
-  height: 380px;
+  height: 420px;
   object-fit: cover;
   display: block;
+  transform: scale(1);
+  transition: transform 260ms ease;
+}
+
+.pd-cover:hover img {
+  transform: scale(1.02);
 }
 
 .pd-noimg {
-  height: 380px;
+  height: 420px;
   display: grid;
   place-items: center;
   gap: 10px;
-  color: rgba(11, 18, 32, 0.8);
-  font-weight: 900;
+
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+  font-weight: 1000;
 }
 
 .pd-noimg ion-icon {
   font-size: 34px;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .pd-chip {
   position: absolute;
   left: 14px;
   bottom: 14px;
-  background: rgba(11, 18, 32, 0.82);
-  color: #fff;
+
+  background: color-mix(in srgb, var(--nav-ink) 88%, transparent);
+  color: var(--nav-surface);
+
   padding: 8px 12px;
   border-radius: 999px;
-  font-weight: 900;
+
+  font-weight: 1000;
   font-size: 12px;
+  letter-spacing: -0.01em;
+
+  border: 1px solid color-mix(in srgb, var(--nav-surface) 16%, transparent);
 }
 
+/* =========================
+   Cards
+========================= */
 .pd-card {
-  background: #fff;
+  background: var(--nav-surface);
   border-radius: 22px;
-  border: 1px solid rgba(11, 18, 32, 0.08);
-  box-shadow: 0 12px 30px rgba(11, 18, 32, 0.06);
+  border: 1px solid var(--stroke);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--text) 10%, transparent);
   padding: 16px;
+  margin-bottom: 40px;
 }
 
 .pd-titleRow {
@@ -120,17 +186,19 @@
 
 .pd-title {
   margin: 0;
-  font-size: 30px;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  font-weight: 900;
+  font-size: 32px;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  font-weight: 1000;
+  color: var(--text);
 }
 
 .pd-updated {
   font-size: 12px;
   font-weight: 900;
-  opacity: 0.65;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
   margin-top: 6px;
+  white-space: nowrap;
 }
 
 .pd-priceRow {
@@ -141,17 +209,21 @@
 }
 
 .pd-price {
-  font-size: 26px;
-  font-weight: 900;
-  color: #0b1220;
+  font-size: 28px;
+  font-weight: 1000;
+  color: var(--text);
+  letter-spacing: -0.02em;
 }
 
 .pd-unit {
   font-size: 14px;
   font-weight: 900;
-  opacity: 0.7;
+  opacity: 0.72;
 }
 
+/* =========================
+   Meta grid
+========================= */
 .pd-meta {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -159,8 +231,8 @@
 }
 
 .pd-metaItem {
-  background: #f7f7f7;
-  border: 1px solid rgba(11, 18, 32, 0.08);
+  background: var(--bg);
+  border: 1px solid var(--stroke);
   border-radius: 18px;
   padding: 10px 12px;
 }
@@ -168,67 +240,84 @@
 .pd-label {
   display: block;
   font-size: 11px;
-  font-weight: 900;
-  opacity: 0.65;
+  font-weight: 1000;
+  color: color-mix(in srgb, var(--text) 58%, transparent);
+  letter-spacing: -0.01em;
 }
 
 .pd-value {
   display: block;
   margin-top: 4px;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 1000;
+  color: color-mix(in srgb, var(--text) 92%, transparent);
 }
 
+/* =========================
+   Description
+========================= */
 .pd-desc {
   margin-top: 10px;
-  border-top: 1px solid rgba(11, 18, 32, 0.08);
+  border-top: 1px solid var(--stroke);
   padding-top: 12px;
 }
 
 .pd-desc h3 {
   margin: 0 0 8px;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 1000;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--text) 92%, transparent);
 }
 
 .pd-desc p {
   margin: 0;
-  line-height: 1.65;
-  font-weight: 700;
-  opacity: 0.85;
+  line-height: 1.68;
+  font-weight: 800;
+  color: var(--muted);
 }
 
+/* =========================
+   Path
+========================= */
 .pd-path {
   margin-top: 14px;
-  border-top: 1px solid rgba(11, 18, 32, 0.08);
+  border-top: 1px solid var(--stroke);
   padding-top: 12px;
 }
 
 .pd-path h3 {
   margin: 0 0 8px;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 1000;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--text) 92%, transparent);
 }
 
 .pd-pathLine {
-  background: #f7f7f7;
-  border: 1px solid rgba(11, 18, 32, 0.08);
+  background: var(--bg);
+  border: 1px solid var(--stroke);
   border-radius: 18px;
   padding: 12px;
+
   font-weight: 900;
   font-size: 12px;
   line-height: 1.6;
+  color: color-mix(in srgb, var(--text) 86%, transparent);
 }
 
 .pd-pathSep {
   opacity: 0.55;
 }
 
+/* =========================
+   Seller card
+========================= */
 .pd-sellerCard {
-  background: #fff;
+  background: var(--nav-surface);
   border-radius: 22px;
-  border: 1px solid rgba(11, 18, 32, 0.08);
-  box-shadow: 0 12px 30px rgba(11, 18, 32, 0.06);
+  border: 1px solid var(--stroke);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--text) 10%, transparent);
   padding: 16px;
 }
 
@@ -242,23 +331,29 @@
   width: 46px;
   height: 46px;
   border-radius: 16px;
-  background: #3b82f6;
+
+  background: var(--accent);
   display: grid;
   place-items: center;
-  color: #fff;
-  font-weight: 900;
+
+  color: var(--nav-surface);
+  font-weight: 1000;
   font-size: 18px;
+
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
 .pd-sellerName {
-  font-weight: 900;
+  font-weight: 1000;
   font-size: 16px;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--text) 92%, transparent);
 }
 
 .pd-sellerAddr {
   margin-top: 2px;
-  font-weight: 800;
-  opacity: 0.7;
+  font-weight: 900;
+  color: var(--muted);
   font-size: 12px;
 }
 
@@ -267,7 +362,7 @@
   display: grid;
   gap: 8px;
   padding-top: 12px;
-  border-top: 1px solid rgba(11, 18, 32, 0.08);
+  border-top: 1px solid var(--stroke);
 }
 
 .pd-infoRow {
@@ -278,14 +373,18 @@
 }
 
 .pd-infoKey {
-  font-weight: 900;
-  opacity: 0.7;
+  font-weight: 1000;
+  color: var(--muted);
 }
 
 .pd-infoVal {
-  font-weight: 900;
+  font-weight: 1000;
+  color: color-mix(in srgb, var(--text) 92%, transparent);
 }
 
+/* =========================
+   Actions + Buttons
+========================= */
 .pd-actions {
   margin-top: 12px;
   display: grid;
@@ -298,139 +397,112 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+
   padding: 12px 14px;
   border-radius: 16px;
-  background: #3b82f6;
-  color: #fff;
-  border: 1px solid rgba(59, 130, 246, 0.2);
+
+  background: var(--accent);
+  color: var(--nav-surface);
+
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
   text-decoration: none;
-  font-weight: 900;
+
+  font-weight: 1000;
   cursor: pointer;
+
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.pd-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.pd-btn:active {
+  transform: translateY(0px);
 }
 
 .pd-btn.ghost {
-  background: #fff;
-  color: #0b1220;
-  border: 1px solid rgba(11, 18, 32, 0.12);
+  background: var(--nav-surface);
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.pd-btn.ghost:hover {
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--text) 16%, transparent);
 }
 
 .pd-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.55;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
+/* =========================
+   Tip
+========================= */
 .pd-tip {
   margin-top: 12px;
-  background: #f7f7f7;
-  border: 1px solid rgba(11, 18, 32, 0.08);
+  background: var(--bg);
+  border: 1px solid var(--stroke);
   border-radius: 18px;
   padding: 12px;
-  font-weight: 800;
+
+  font-weight: 900;
   font-size: 12px;
   line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
 }
 
+/* =========================
+   Mini (Safety)
+========================= */
 .pd-mini {
-  background: #0b1220;
-  color: #fff;
+  background: var(--nav-ink);
+  color: var(--nav-surface);
   border-radius: 22px;
   padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border: 1px solid color-mix(in srgb, var(--nav-surface) 10%, transparent);
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--text) 18%, transparent);
 }
 
 .pd-mini h3 {
   margin: 0 0 8px;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 1000;
 }
 
 .pd-mini ul {
   margin: 0;
   padding-left: 18px;
-  opacity: 0.9;
-  font-weight: 800;
-  line-height: 1.6;
+  opacity: 0.92;
+  font-weight: 900;
+  line-height: 1.65;
   font-size: 12px;
 }
 
+/* =========================
+   Bottom bar — NOT USED
+========================= */
 .pd-bottom {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(11, 18, 32, 0.10);
-  padding: 12px 14px;
+  display: none;
 }
 
-.pd-bottomInner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.pd-bottomTitle {
-  font-weight: 900;
-  color: #0b1220;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 60%;
-}
-
-.pd-bottomPrice {
-  font-weight: 900;
-  color: #0b1220;
-  opacity: 0.85;
-  margin-top: 2px;
-  font-size: 12px;
-}
-
-.pd-bottomRight {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
-@media (max-width: 980px) {
-  .pd-grid {
-    grid-template-columns: 1fr;
-  }
-  .pd-cover img,
-  .pd-noimg {
-    height: 320px;
-  }
-  .pd-meta {
-    grid-template-columns: 1fr;
-  }
-  .pd-bottomTitle {
-    max-width: 52%;
-  }
-}
-
-@media (max-width: 560px) {
-  .pd-title {
-    font-size: 24px;
-  }
-  .pd-price {
-    font-size: 22px;
-  }
-}
-
-
-
-/* Seller block */
+/* =========================
+   Seller strip (bottom block)
+========================= */
 .pd-seller {
-  margin-top: 16px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(11, 18, 32, 0.08);
+  margin-top: 14px;
+  background: color-mix(in srgb, var(--nav-surface) 92%, transparent);
+  border: 1px solid var(--stroke);
   border-radius: 22px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 16px 36px color-mix(in srgb, var(--text) 12%, transparent);
   padding: 16px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -448,21 +520,26 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(59, 130, 246, 0.12);
-  color: #3b82f6;
+
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 1000;
 }
 
 .pd-sellerName {
   display: inline-flex;
   flex-direction: column;
   gap: 4px;
+
   text-decoration: none;
-  color: #0b1220;
-  font-weight: 900;
+  color: var(--text);
+
+  font-weight: 1000;
   font-size: 16px;
   letter-spacing: -0.2px;
 }
@@ -471,54 +548,166 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+
   font-size: 12px;
-  font-weight: 900;
-  color: rgba(11, 18, 32, 0.65);
+  font-weight: 1000;
+  color: var(--muted);
 }
 
 .pd-sellerMeta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: rgba(11, 18, 32, 0.62);
+
+  color: var(--muted);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .pd-sellerDot {
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: rgba(59, 130, 246, 0.8);
+  background: color-mix(in srgb, var(--accent) 80%, transparent);
 }
 
 .pd-sellerBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+
   text-decoration: none;
-  background: #0b1220;
-  color: #fff;
-  font-weight: 900;
+  background: var(--nav-ink);
+  color: var(--nav-surface);
+
+  font-weight: 1000;
   border-radius: 16px;
   padding: 12px 14px;
-  box-shadow: 0 12px 30px rgba(11, 18, 32, 0.18);
-  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--text) 18%, transparent);
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
   white-space: nowrap;
+
+  border: 1px solid color-mix(in srgb, var(--nav-surface) 10%, transparent);
 }
 
 .pd-sellerBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 14px 34px rgba(11, 18, 32, 0.22);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--text) 22%, transparent);
+}
+
+/* =========================
+   Responsive — IDEAL
+========================= */
+@media (max-width: 1180px) {
+  .pd-container {
+    padding: 10px 24px 8px;
+  }
+  .pd-cover img,
+  .pd-noimg {
+    height: 380px;
+  }
+}
+
+@media (max-width: 980px) {
+  .pd-grid {
+    grid-template-columns: 1fr;
+  }
+  .pd-cover img,
+  .pd-noimg {
+    height: 340px;
+  }
+  .pd-meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .pd-container {
+    padding: 10px 16px 8px;
+  }
+  .pd-titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pd-updated {
+    margin-top: 2px;
+  }
+  .pd-cover img,
+  .pd-noimg {
+    height: 300px;
+  }
+  .pd-card,
+  .pd-sellerCard {
+    padding: 14px;
+  }
 }
 
 @media (max-width: 560px) {
+  .pd-title {
+    font-size: 24px;
+  }
+  .pd-price {
+    font-size: 22px;
+  }
+  .pd-cover img,
+  .pd-noimg {
+    height: 260px;
+  }
   .pd-seller {
     flex-direction: column;
     align-items: flex-start;
   }
   .pd-sellerBtn {
     width: 100%;
+  }
+  .pd-btn,
+  .pd-sellerBtn {
+    border-radius: 14px;
+    padding: 12px 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .pd-back {
+    width: 100%;
     justify-content: center;
+  }
+  .pd-title {
+    font-size: 21px;
+  }
+  .pd-price {
+    font-size: 20px;
+  }
+  .pd-cover img,
+  .pd-noimg {
+    height: 230px;
+  }
+  .pd-chip {
+    left: 10px;
+    bottom: 10px;
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .pd-container {
+    padding: 10px 12px 8px;
+  }
+  .pd-title {
+    font-size: 20px;
+  }
+  .pd-price {
+    font-size: 19px;
+  }
+  .pd-cover img,
+  .pd-noimg {
+    height: 210px;
+  }
+  .pd-metaItem {
+    border-radius: 16px;
+    padding: 10px 10px;
   }
 }

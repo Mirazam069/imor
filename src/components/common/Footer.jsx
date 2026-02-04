@@ -33,7 +33,7 @@ export default function Footer() {
 
             <div>
               <h4>Aloqa</h4>
-              <a href="tel:+998900000000">+998 90 000 00 00</a>
+              <a href="tel:+998900000000">+998 97 156 68 05</a>
               <a href="mailto:info@imor.uz">info@imor.uz</a>
               <span>Toshkent, O‘zbekiston</span>
             </div>

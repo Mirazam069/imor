@@ -103,6 +103,9 @@ export default function ProductDetails() {
   const [err, setErr] = useState("");
   const [productFromApi, setProductFromApi] = useState(null);
 
+  // ✅ Pastdagi fixed “Qo‘ng‘iroq/Telegram” shart emas — box ichida turgani yetadi
+  const SHOW_BOTTOM_BAR = false;
+
   // 1) Avval state => 2) API (getProductById) => 3) Catalog node
   useEffect(() => {
     let alive = true;
@@ -272,9 +275,7 @@ export default function ProductDetails() {
           {/* LEFT */}
           <div className="pd-left">
             <div className="pd-cover">
-              {hasImage ? (
-               <img src={resolveImageUrl(image)} alt={title} />
-              ) : (
+              {hasImage ? <img src={resolveImageUrl(image)} alt={title} /> : (
                 <div className="pd-noimg">
                   <ion-icon name="image-outline" />
                   <span>Rasm yo‘q</span>
@@ -395,32 +396,34 @@ export default function ProductDetails() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pd-bottom">
-          <div className="pd-bottomInner">
-            <div className="pd-bottomLeft">
-              <div className="pd-bottomTitle">{title}</div>
-              <div className="pd-bottomPrice">
-                {shownPrice ? `${formatUZS(shownPrice)} so‘m` : "Narx yo‘q"}
-                {shownUnit ? ` / ${shownUnit}` : ""}
+        {/* Bottom bar — ✅ endi kerak emas */}
+        {SHOW_BOTTOM_BAR ? (
+          <div className="pd-bottom">
+            <div className="pd-bottomInner">
+              <div className="pd-bottomLeft">
+                <div className="pd-bottomTitle">{title}</div>
+                <div className="pd-bottomPrice">
+                  {shownPrice ? `${formatUZS(shownPrice)} so‘m` : "Narx yo‘q"}
+                  {shownUnit ? ` / ${shownUnit}` : ""}
+                </div>
+              </div>
+
+              <div className="pd-bottomRight">
+                <a className="pd-btn" href={`tel:${seller.phone}`}>
+                  Qo‘ng‘iroq
+                </a>
+                {tgLink ? (
+                  <a className="pd-btn ghost" href={tgLink} target="_blank" rel="noreferrer">
+                    Telegram
+                  </a>
+                ) : null}
               </div>
             </div>
-
-            <div className="pd-bottomRight">
-              <a className="pd-btn" href={`tel:${seller.phone}`}>
-                Qo‘ng‘iroq
-              </a>
-              {tgLink ? (
-                <a className="pd-btn ghost" href={tgLink} target="_blank" rel="noreferrer">
-                  Telegram
-                </a>
-              ) : null}
-            </div>
           </div>
-        </div>
+        ) : null}
 
         {/* Seller strip (pastda) */}
-        <div className="pd-seller">
+        {/* <div className="pd-seller">
           <div className="pd-sellerLeft">
             <div className="pd-sellerBadge">
               <ion-icon name="storefront-outline"></ion-icon>
@@ -444,7 +447,7 @@ export default function ProductDetails() {
             <ion-icon name="open-outline"></ion-icon>
             O‘tish
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );
