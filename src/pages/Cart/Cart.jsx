@@ -131,9 +131,7 @@ export default function Cart() {
             <button className="cart-btn ghost" onClick={() => navigate("/catalog")} type="button">
               Katalogga qaytish
             </button>
-            <button className="cart-btn" onClick={() => alert("Buyurtma berish (demo)")} type="button">
-              Buyurtma berish
-            </button>
+            
           </div>
         </div>
 
@@ -222,9 +220,13 @@ export default function Cart() {
 
               <div className="cart-totalRight">
                 <div className="cart-totalNum">{formatUZS(total)} so‘m</div>
-                <button className="cart-btn" onClick={() => alert("Buyurtma berish (demo)")} type="button">
-                  Buyurtma berish
-                </button>
+                <button
+              className="cart-btn"
+              onClick={() => window.open("https://t.me/mirzahidov1ch", "_blank", "noopener,noreferrer")}
+              type="button"
+            >
+              Buyurtma berish
+            </button>
               </div>
             </div>
           </>

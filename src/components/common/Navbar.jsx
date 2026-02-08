@@ -2,7 +2,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import "./Navbar.css";
 import { useCart } from "../../context/CartContext";
-import Logo from '../Logo.png';
+import Logo from '../imoruzicon.png';
 
 /* ✅ Seller access: local/session storage dan o‘qiymiz */
 function readAuth() {
@@ -108,7 +108,7 @@ function Navbar() {
         <div className="nav-row nav-row-top">
           {/* Logo */}
           <Link to="/" className="brand">
-              <img src={Logo} alt="IMOR.UZ Logo" style={{width: '54px', height: '54px'}}/>
+              <img src={Logo} alt="IMOR.UZ Logo" style={{width: '30px', height: '30px'}}/>
             <span className="brand-text">
               IMOR<span className="brand-accent">.UZ</span>
             </span>
@@ -131,6 +131,7 @@ function Navbar() {
           </form>
 
           {/* Right actions */}
+          
           <div className="nav-right">
             {/* ✅ Language (mobile ham ko‘rinadi) */}
             <div className={langOpen ? "nav-lang open" : "nav-lang"}>

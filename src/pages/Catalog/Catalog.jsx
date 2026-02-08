@@ -413,7 +413,16 @@ function Catalog() {
                         </div>
 
                         <div className="sub-foot">
-                          <div className="sub-title">{p.title}</div>
+                          <div className="sub-meta">
+                            <div className="sub-title">{p.title}</div>
+
+                            {/* ✅ NARX + BIRLIK — nomi tagiga tushdi */}
+                            <div className="sub-priceInline">
+                              <div className="sub-priceNum">{p.price ? `${formatUZS(p.price)} so‘m` : "Narx yo‘q"}</div>
+                              {p.unit ? <div className="sub-priceUnit">/{p.unit}</div> : null}
+                            </div>
+                          </div>
+
                           <div className="sub-go">
                             <ion-icon name="arrow-forward-outline"></ion-icon>
                           </div>
@@ -421,11 +430,6 @@ function Catalog() {
                       </button>
 
                       <div className="sub-actions">
-                        <div className="price">
-                          <div className="price-num">{p.price ? `${formatUZS(p.price)} so‘m` : "Narx yo‘q"}</div>
-                          <div className="price-unit">{p.unit ? `/${p.unit}` : ""}</div>
-                        </div>
-
                         <div className="btnRow">
                           <button
                             className="buyBtn"

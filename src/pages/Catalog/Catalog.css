@@ -319,6 +319,8 @@
   box-shadow: 0 14px 45px rgba(0, 0, 0, 0.06);
   transition: 0.18s ease;
   will-change: transform;
+  display: flex;
+  flex-direction: column;
 }
 
 .sub-cardX:hover {
@@ -333,6 +335,9 @@
   cursor: pointer;
   padding: 0;
   text-align: left;
+    flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Media */
@@ -443,11 +448,39 @@
   background: color-mix(in srgb, var(--cat-accent) 10%, rgba(247, 247, 247, 0.9));
 }
 
+/* ✅ NEW: mahsulot title + price blokini tekis qilish */
+.sub-meta {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.sub-priceInline {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sub-priceNum {
+  font-size: 17px;
+  font-weight: 950;
+  color: rgba(11, 18, 32, 0.92);
+  white-space: nowrap;
+}
+
+.sub-priceUnit {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: rgba(11, 18, 32, 0.62);
+  white-space: nowrap;
+}
+
 /* Actions */
 .sub-actions {
   padding: 10px 12px 12px;
   border-top: 1px solid var(--cat-stroke);
-
+  margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -772,6 +805,19 @@
 
   .sub-go ion-icon {
     font-size: 16px;
+  }
+
+  /* ✅ NEW — mobile’da ham narx tekis chiqsin */
+  .sub-meta {
+    gap: 4px;
+  }
+
+  .sub-priceNum {
+    font-size: 12px;
+  }
+
+  .sub-priceUnit {
+    font-size: 11px;
   }
 
   /* ACTIONS */

@@ -49,7 +49,7 @@ export const CATALOG_TREE = [
       { key: "brick", title: "G‘isht", img: IMG.brick }, // ✅ leaf
       { key: "cement", title: "Sement", img: IMG.cement }, // ✅ leaf
       { key: "rebar", title: "Armatura", img: IMG.rebar }, // ✅ leaf
-      { key: "blocks", title: "Blok va gazobeton", img: IMG.blocks }, // ✅ leaf
+      { key: "blocks", title: "Gazablok", img: IMG.blocks }, // ✅ leaf
       { key: "sand", title: "Qum", img: "https://images.unsplash.com/photo-1616353071855-2d4f3b6a2a1c?auto=format&fit=crop&w=1400&q=80" },
       { key: "gravel", title: "Shag‘al", img: "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1400&q=80" },
     ],

@@ -97,3 +97,14 @@ a {
 .appMain {
   flex: 1;
 }
+
+
+.back-btn,
+.back-btn:link,
+.back-btn:visited,
+.back-btn:hover,
+.back-btn:active {
+  color: var(--text, #0b1220);
+  text-decoration: none;
+  -webkit-text-fill-color: var(--text, #0b1220); /* MUHIM */
+}

@@ -39,6 +39,9 @@
 
   transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
   box-shadow: 0 10px 30px color-mix(in srgb, var(--text) 10%, transparent);
+    color: var(--text, #0b1220);
+  text-decoration: none;
+  -webkit-text-fill-color: var(--text, #0b1220); /* MUHIM */
 }
 
 .pd-back:hover {
