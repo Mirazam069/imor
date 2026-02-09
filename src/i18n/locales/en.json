@@ -1,0 +1,184 @@
+{
+  "nav": {
+    "searchPlaceholder": "Brick, cement, rebar...",
+    "searchPlaceholderMobile": "Search...",
+    "languageAria": "Choose language",
+    "login": "Login",
+    "logout": "Logout",
+    "cart": "Cart",
+    "cartAria": "Cart",
+    "menuAria": "Menu",
+    "catalog": "Catalog",
+    "about": "About IMOR",
+    "sellerPanel": "Seller panel",
+    "menuTitle": "Menu",
+    "closeAria": "Close",
+    "langQuick": "Language",
+    "tapToSwitch": "tap to switch"
+  },
+  "lang": {
+    "uz": "O‘zbekcha",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "partners": {
+    "title": "Trusted partners",
+    "desc": "Hundreds of sellers and major brands are active on the IMOR platform."
+  },
+  "recommended": {
+    "title": "Recommended products",
+    "desc": "Most viewed and high-demand offers.",
+    "viewAll": "View all",
+    "badge": "Recommended",
+    "view": "View",
+    "demo": {
+      "p1_title": "Cement M500 (50kg)",
+      "p1_price": "78,000 UZS",
+      "p1_city": "Tashkent",
+      "p2_title": "Rebar 12mm",
+      "p2_price": "12,500 UZS / m",
+      "p2_city": "Tashkent",
+      "p3_title": "Brick (fired)",
+      "p3_price": "1,350 UZS",
+      "p3_city": "Samarkand",
+      "p4_title": "Dry mix (25kg)",
+      "p4_price": "42,000 UZS",
+      "p4_city": "Andijan"
+    }
+  },
+  "aboutProject": {
+    "back": "← Back",
+    "viewCatalog": "View catalog",
+    "postAd": "Post an ad",
+    "whoForTitle": "Who is IMOR.uz for?",
+    "whoForDesc": "The platform brings together everyone in the construction ecosystem.",
+    "whoFor": {
+      "homeBuilders": {
+        "title": "Home builders",
+        "desc": "Find materials fast, compare by price and unit, and contact the seller."
+      },
+      "masters": {
+        "title": "Masters & crews",
+        "desc": "Save time by finding everything in one place. Easy region-based search."
+      },
+      "companies": {
+        "title": "Companies",
+        "desc": "Quick deals for large quantities. Minimum order and delivery are shown."
+      },
+      "shops": {
+        "title": "Stores & dealers",
+        "desc": "Post ads and show your products to more people. Fast sales via phone/Telegram."
+      },
+      "manufacturers": {
+        "title": "Manufacturers",
+        "desc": "List products as a brand; premium visibility/SEO positions can be enabled later."
+      },
+      "logistics": {
+        "title": "Logistics",
+        "desc": "Delivery service integrations are one of our next steps."
+      }
+    },
+    "howTitle": "How does it work?",
+    "howDesc": "In 3 steps: find → contact → agree. For sellers: post → visibility → sales.",
+    "steps": {
+      "s1_title": "Search & compare",
+      "s1_desc": "Pick a type in the catalog: brick, cement, rebar, and more. Price and unit are clearly shown.",
+      "s2_title": "Contact",
+      "s2_desc": "Contact the seller via phone or Telegram. Region and minimum quantity are also displayed.",
+      "s3_title": "Agreement & delivery",
+      "s3_desc": "Make a deal. Delivery availability is shown on the listing."
+    },
+    "roadmap": {
+      "title": "Roadmap",
+      "desc": "MVP → Stable → Marketplace. Start fast, then build a strong system.",
+      "mvp_title": "MVP (now)",
+      "mvp_desc": "Catalog, listings, images, contact, cart, seller panel.",
+      "stabil_title": "Stable version",
+      "stabil_desc": "Orders, payments, invoices, delivery tracking, profile and verification.",
+      "market_title": "Marketplace",
+      "market_desc": "Ratings, reviews, premium placements, SEO positions, brand banners."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "desc": "Short and clear answers to the most common questions.",
+      "items": {
+        "q1": "What is IMOR.uz?",
+        "a1": "IMOR.uz is a marketplace that simplifies the construction materials market. Buyers find materials fast, and sellers reach more customers.",
+        "q2": "Who is it for?",
+        "a2": "Home builders, masters and crews, construction companies, stores, dealers, manufacturers, and logistics services.",
+        "q3": "How are products posted?",
+        "a3": "A seller posts via “Add product” by entering name, price, unit, minimum quantity, region, phone/telegram, and uploading an image. The listing appears in the catalog.",
+        "q4": "How will orders and payments work?",
+        "a4": "At the current stage, the order flow is simplified (demo / MVP). Next: orders, payments, invoices, delivery tracking, and a warranty system.",
+        "q5": "Why is an image required?",
+        "a5": "An image increases trust and speeds up decisions. To keep listing quality high, an image is required.",
+        "q6": "What benefits does it provide?",
+        "a6": "Saves time, makes comparisons easy, brings more inquiries for sellers, and helps buyers find clear pricing and nearby sellers—speeding up deals."
+      }
+    },
+    "cta": {
+      "title": "Ready to start with IMOR?",
+      "desc": "Browse the catalog or post an ad right away. IMOR speeds up finding and selling construction materials.",
+      "postAd": "Post an ad",
+      "notePrefix": "Note: the platform is in MVP stage. For suggestions and partnerships:"
+    }
+  },
+  "home": {
+    "hero": {
+      "titleLine1": "Construction materials",
+      "accent": "in Uzbekistan",
+      "titleLine2": "all in one place",
+      "subtitle": "Find materials by price, region, and category. For sellers—posting an ad is very easy.",
+      "ctaCatalog": "Go to catalog",
+      "ctaMore": "Learn more"
+    },
+    "banners": {
+      "b1_title": "Top sellers — best prices",
+      "b1_desc": "Find in the catalog, compare, and contact quickly.",
+      "b1_cta": "Go to catalog",
+      "b2_title": "Are you a seller? Post an ad in 1 minute",
+      "b2_desc": "Image + price + phone. The platform handles the rest.",
+      "b2_cta": "Post an ad",
+      "b3_title": "Materials in your area",
+      "b3_desc": "Search by region/district and find nearby sellers.",
+      "b3_cta": "Start searching",
+      "dotAria": "Banner"
+    },
+    "popular": {
+      "title": "Popular materials",
+      "items": {
+        "bulk": "Common building materials",
+        "wall": "Wall construction materials",
+        "electro": "Other electrical materials",
+        "tools": "Tools & equipment",
+        "roof": "Roofing materials",
+        "wood": "Wood materials",
+        "paint": "Paint & finishing",
+        "cover": "Wall coverings",
+        "power": "Power tools",
+        "light": "Lighting",
+        "cables": "Cables & wires",
+        "dry": "Dry construction mixes"
+      }
+    },
+    "cta": {
+      "title": "Do you sell materials?",
+      "desc": "Post one listing—nearby buyers will contact you.",
+      "postAd": "Post an ad"
+    }
+  },
+  "footer": {
+    "brandDesc": "A modern marketplace for construction materials. Trusted sellers, real prices, and fast delivery.",
+    "platform": "Platform",
+    "catalog": "Catalog",
+    "postAd": "Post an ad",
+    "login": "Login",
+    "info": "Information",
+    "about": "About us",
+    "terms": "Terms of use",
+    "privacy": "Privacy policy",
+    "contact": "Contact",
+    "city": "Tashkent, Uzbekistan",
+    "bottomTagline": "Construction market platform"
+  }
+}

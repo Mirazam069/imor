@@ -108,3 +108,24 @@ a {
   text-decoration: none;
   -webkit-text-fill-color: var(--text, #0b1220); /* MUHIM */
 }
+
+
+.lang-switch {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.lang-btn {
+  border: 1px solid rgba(11,18,32,.12);
+  background: #fff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lang-btn.active {
+  border-color: var(--nav-accent, #F8AD40);
+  box-shadow: 0 10px 25px rgba(248,173,64,.18);
+}

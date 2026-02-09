@@ -1,0 +1,184 @@
+{
+  "nav": {
+    "searchPlaceholder": "G‘isht, sement, armatura...",
+    "searchPlaceholderMobile": "Qidiruv...",
+    "languageAria": "Til tanlash",
+    "login": "Kirish",
+    "logout": "Chiqish",
+    "cart": "Korzina",
+    "cartAria": "Korzina",
+    "menuAria": "Menu",
+    "catalog": "Katalog",
+    "about": "IMOR haqida",
+    "sellerPanel": "Sotuvchi paneli",
+    "menuTitle": "Menyu",
+    "closeAria": "Yopish",
+    "langQuick": "Til",
+    "tapToSwitch": "bosib almashtir"
+  },
+  "lang": {
+    "uz": "O‘zbekcha",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "partners": {
+    "title": "Ishonchli hamkorlar",
+    "desc": "IMOR platformasida yuzlab sotuvchilar va yirik brendlar faol."
+  },
+  "recommended": {
+    "title": "Tavsiya etiladigan mahsulotlar",
+    "desc": "Eng ko‘p ko‘rilayotgan va talab yuqori bo‘lgan takliflar.",
+    "viewAll": "Hammasini ko‘rish",
+    "badge": "Tavsiya",
+    "view": "Ko‘rish",
+    "demo": {
+      "p1_title": "Sement M500 (50kg)",
+      "p1_price": "78 000 so‘m",
+      "p1_city": "Toshkent",
+      "p2_title": "Armatura 12mm",
+      "p2_price": "12 500 so‘m / m",
+      "p2_city": "Toshkent",
+      "p3_title": "G‘isht (pishgan)",
+      "p3_price": "1 350 so‘m",
+      "p3_city": "Samarqand",
+      "p4_title": "Quruq aralashma (25kg)",
+      "p4_price": "42 000 so‘m",
+      "p4_city": "Andijon"
+    }
+  },
+  "aboutProject": {
+    "back": "← Orqaga",
+    "viewCatalog": "Katalogni ko‘rish",
+    "postAd": "E'lon joylash",
+    "whoForTitle": "IMOR.uz kimlar uchun?",
+    "whoForDesc": "Platforma qurilish ekotizimidagi hamma ishtirokchilarni birlashtiradi.",
+    "whoFor": {
+      "homeBuilders": {
+        "title": "Uy qurayotganlar",
+        "desc": "Materiallarni tez toping, narx va birlik bo‘yicha solishtiring, sotuvchi bilan bog‘laning."
+      },
+      "masters": {
+        "title": "Usta va brigadalar",
+        "desc": "Kerakli materiallarni bir joydan topib, vaqtni tejang. Hudud bo‘yicha topish qulay."
+      },
+      "companies": {
+        "title": "Kompaniyalar",
+        "desc": "Ko‘p miqdordagi materiallar uchun tez kelishuv. Minimal miqdor va yetkazib berish ko‘rsatiladi."
+      },
+      "shops": {
+        "title": "Do‘konlar va dilerlar",
+        "desc": "E’lon berib, mahsulotingizni ko‘proq odamga ko‘rsating. Telefon/Telegram orqali tez savdo."
+      },
+      "manufacturers": {
+        "title": "Ishlab chiqaruvchilar",
+        "desc": "Mahsulotingizni brend sifatida joylang, premium ko‘rinish/SEO pozitsiyalarini keyinroq ulash mumkin."
+      },
+      "logistics": {
+        "title": "Logistika",
+        "desc": "Yetkazib berish xizmatlari bilan integratsiya — keyingi bosqichlarimizdan biri."
+      }
+    },
+    "howTitle": "Qanday ishlaydi?",
+    "howDesc": "3 qadamda: topish → aloqa → kelishuv. Sotuvchi uchun: joylash → ko‘rinish → savdo.",
+    "steps": {
+      "s1_title": "Qidirish va solishtirish",
+      "s1_desc": "Katalogdan tur tanlang: g‘isht, sement, armatura va boshqalar. Narx va birlik aniq ko‘rinadi.",
+      "s2_title": "Aloqa",
+      "s2_desc": "Telefon yoki Telegram orqali sotuvchi bilan bog‘laning. Hudud va minimal miqdor ham ko‘rsatiladi.",
+      "s3_title": "Kelishuv va yetkazib berish",
+      "s3_desc": "Kelishuv qiling. Yetkazib berish bor-yo‘qligi e’lonning o‘zida ko‘rinadi."
+    },
+    "roadmap": {
+      "title": "Roadmap",
+      "desc": "MVP → Stabil → Marketplace. Dastlab tez start, keyin kuchli tizim.",
+      "mvp_title": "MVP (hozir)",
+      "mvp_desc": "Katalog, mahsulot e’lonlari, rasm, aloqa, korzina, sotuvchi paneli.",
+      "stabil_title": "Stabil versiya",
+      "stabil_desc": "Buyurtma oqimi, to‘lov, invoice, yetkazib berish holati (tracking), profil va verifikatsiya.",
+      "market_title": "Marketplace",
+      "market_desc": "Reyting, sharhlar, premium joylar, SEO pozitsiyalar, brendlar uchun bannerlar."
+    },
+    "faq": {
+      "title": "Ko‘p so‘raladigan savollar",
+      "desc": "Eng ko‘p beriladigan savollarga qisqa va aniq javoblar.",
+      "items": {
+        "q1": "IMOR.uz nima?",
+        "a1": "IMOR.uz — qurilish materiallari bozorini soddalashtiradigan marketplace. Xaridorlar materiallarni tez topadi, sotuvchilar esa o‘z mahsulotlarini ko‘proq mijozga chiqaradi.",
+        "q2": "Kimlar uchun?",
+        "a2": "Uy qurayotganlar, usta va brigadalar, qurilish kompaniyalari, do‘konlar, dilerlar, ishlab chiqaruvchilar va logistika xizmatlari uchun.",
+        "q3": "Mahsulotlar qanday joylanadi?",
+        "a3": "Sotuvchi “Mahsulot qo‘shish” orqali nom, narx, birlik, minimal miqdor, hudud, telefon/telegram va mahsulot rasmini yuklab e’lon qiladi. E’lon katalogda ko‘rinadi.",
+        "q4": "Buyurtma va to‘lov qanday bo‘ladi?",
+        "a4": "Hozirgi bosqichda buyurtma oqimi soddalashtirilgan (demo / MVP). Keyingi bosqichlarda: buyurtma, to‘lov, hisob-faktura, yetkazib berish tracking va kafolat tizimi qo‘shiladi.",
+        "q5": "Nega rasm majburiy?",
+        "a5": "Rasm — ishonchni oshiradi va mijoz tanlovini tezlashtiradi. IMOR’da e’lon sifati yuqori bo‘lishi uchun rasm talab qilinadi.",
+        "q6": "Qanday foyda beradi?",
+        "a6": "Vaqt tejaladi, solishtirish oson, sotuvchilar uchun ko‘proq so‘rov, xaridor uchun aniq narx va hudud bo‘yicha topish, kelishuvni tezlashtiradi."
+      }
+    },
+    "cta": {
+      "title": "IMOR’da boshlashga tayyormisiz?",
+      "desc": "Katalogni ko‘ring yoki darhol e’lon bering. IMOR — qurilish materiallarini topish va sotishni tezlashtiradi.",
+      "postAd": "E'lon joylash",
+      "notePrefix": "Eslatma: platforma MVP bosqichida. Takliflar va hamkorlik uchun aloqa:"
+    }
+  },
+  "home": {
+    "hero": {
+      "titleLine1": "O‘zbekiston­dagi",
+      "accent": "qurilish materiallari",
+      "titleLine2": "bitta joyda",
+      "subtitle": "Materiallarni narx, hudud va kategoriya bo‘yicha toping. Sotuvchilar uchun — e’lon joylash juda oson.",
+      "ctaCatalog": "Katalogga o‘tish",
+      "ctaMore": "Batafsil ma'lumot"
+    },
+    "banners": {
+      "b1_title": "TOP sotuvchilar — eng yaxshi narxlar",
+      "b1_desc": "Katalogdan toping, solishtiring va tez bog‘laning.",
+      "b1_cta": "Katalogga o‘tish",
+      "b2_title": "Sotuvchimisiz? 1 daqiqada e’lon joylang",
+      "b2_desc": "Rasm + narx + telefon. Qolganini platforma qiladi.",
+      "b2_cta": "E’lon joylash",
+      "b3_title": "Hududingizdagi materiallar",
+      "b3_desc": "Viloyat/tuman bo‘yicha qidirib, yaqin sotuvchini toping.",
+      "b3_cta": "Qidiruvni boshlash",
+      "dotAria": "Banner"
+    },
+    "popular": {
+      "title": "Mashhur materiallar",
+      "items": {
+        "bulk": "Ommaviy qurilish materiallari",
+        "wall": "Devor ko‘tarish uchun materiallar",
+        "electro": "Boshqa elektr materiallari",
+        "tools": "Uskunalar",
+        "roof": "Tom yopish materiallari",
+        "wood": "Yog‘och materiallari",
+        "paint": "Bo‘yoq va pardozlash",
+        "cover": "Devor qoplamalari",
+        "power": "Elektr asboblari",
+        "light": "Yoritish",
+        "cables": "Kabel va simlar",
+        "dry": "Quruq qurilish aralashmalari"
+      }
+    },
+    "cta": {
+      "title": "Material sotasizmi?",
+      "desc": "Bitta e’lon qo‘ying — yaqin xaridorlar o‘zlari bog‘lanadi.",
+      "postAd": "E’lon joylash"
+    }
+  },
+  "footer": {
+    "brandDesc": "Qurilish materiallari uchun zamonaviy marketplace. Ishonchli sotuvchilar, real narxlar va tez yetkazib berish.",
+    "platform": "Platforma",
+    "catalog": "Katalog",
+    "postAd": "E’lon joylash",
+    "login": "Kirish",
+    "info": "Ma’lumot",
+    "about": "Biz haqimizda",
+    "terms": "Foydalanish shartlari",
+    "privacy": "Maxfiylik siyosati",
+    "contact": "Aloqa",
+    "city": "Toshkent, O‘zbekiston",
+    "bottomTagline": "Qurilish bozori platformasi"
+  }
+}

@@ -309,7 +309,7 @@ export default function AboutProject() {
             <ion-icon name="information-circle-outline" />
             <span>
               Eslatma: platforma MVP bosqichida. Takliflar va hamkorlik uchun aloqa:{" "}
-              <b>@imor_uz</b> (Telegram).
+              <b>@mirzahidov1ch</b> (Telegram).
             </span>
           </div>
         </section>

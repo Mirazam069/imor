@@ -5,6 +5,7 @@ import router from "./app/routes.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 import { AuthProvider } from "./providers/AuthProvider.jsx"; // ✅ FIX
 import "./styles/globals.css";
+import "./i18n";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
