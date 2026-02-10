@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const SELLER_PHONE = "+998971566805";
-const SELLER_PASSWORD = "12345wwwq";
+const SELLER_PASSWORD = "12345wwwqq";
 
 function normalizePhone(p) {
   return String(p || "").replace(/[^\d+]/g, "");
